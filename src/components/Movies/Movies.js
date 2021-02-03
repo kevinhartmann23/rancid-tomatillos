@@ -14,9 +14,9 @@ function Movies({movies}){
   )
  })
  return (
-  <>
+  <section className='movie-container'>
    {movieCollection}
-  </>
+  </section>
  )
 }
 
