@@ -1,16 +1,18 @@
 .movie {
- min-height: 300px;
- width: 280px;
+  border: 1px solid black;
+  margin: 1rem;
+  min-height: 300px;
+  width: 280px;
 }
 
 .movie-poster {
- height: 280px;
- width: 200px;
- object-fit: cover;
+  height: 280px;
+  width: 200px;
+  object-fit: cover;
 }
 
 .movie-title {
- 
+
 }
 
 .movie-rating {

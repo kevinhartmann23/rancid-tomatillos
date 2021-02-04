@@ -2,22 +2,23 @@ import React from 'react'
 import Card from '../Card/Card'
 import './Movies.css'
 
-function Movies({movies}){
- const movieCollection = movies.map(movie => {
-  return (
-   <Card 
-    id={movie.id}
-    poster={movie.poster_path}
-    title={movie.title}
-    rating={movie.average_rating}
-   />
-  )
- })
- return (
-  <section className='movie-container'>
-   {movieCollection}
-  </section>
- )
+function Movies({movies}) {
+  const movieCollection = movies.map(movie => {
+    return (
+     <Card
+      id={movie.id}
+      poster={movie.poster_path}
+      title={movie.title}
+      rating={movie.average_rating}
+     />
+    )
+  })
+
+    return (
+      <section className='movie-container'>
+        {movieCollection}
+      </section>
+    )
 }
 
 export default Movies

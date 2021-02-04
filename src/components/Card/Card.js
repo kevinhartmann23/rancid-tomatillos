@@ -6,7 +6,7 @@ function Card({ id, poster, title, rating }) {
   <article className='movie' id={id}>
    <img className='movie-poster' src={poster} alt={`${title} poster`} />
    <h1 className='movie-title'>{title}</h1>
-   <p className='movie-rating'>{[rating.toFixed(1)]}</p>
+   <p className='movie-rating'>{`Rating: ${[rating.toFixed(1)]}`}</p>
   </article>
  )
 }
