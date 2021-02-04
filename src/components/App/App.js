@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Movies from '../Movies/Movies'
 import Details from '../Details/Details'
-import movieData from '../../data/movie-data'
 import greenTomato from '../../images/icon-tomato-green.png'
 import './App.css'
 
@@ -9,7 +8,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      display: 'all'
+      display: 'all',
+      movies: []
     }
   }
 
@@ -23,6 +23,20 @@ class App extends Component {
     }
   }
 
+  fetchData() {
+    return fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
+      .then(response => response.json())
+      .catch(error => console.log(error))
+  }
+
+  componentDidMount = () => {
+    const fetchData = this.fetchData()
+    Promise.all([fetchData])
+      .then(response => {
+        this.setState({ movies: response[0].movies })
+      })
+  }
+
   render() {
     let display
 
@@ -32,7 +46,7 @@ class App extends Component {
       )
     } else {
       display = (
-        <Movies movies={movieData.movies} handleClick={this.handleClick}/>
+        <Movies movies={this.state.movies} handleClick={this.handleClick}/>
       )
     }
 
