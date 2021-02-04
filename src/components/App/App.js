@@ -13,8 +13,14 @@ class App extends Component {
     }
   }
 
-  handleClick(id) {
+  handleClick = (event) => {
+    if (event.target.id === 'button-back') {
+      this.setState({ display: 'all' })
 
+    } else {
+      const movieId = event.target.closest('article').id
+      this.setState({ display: 'movie' })
+    }
   }
 
   render() {
@@ -22,7 +28,7 @@ class App extends Component {
 
     if (this.state.display === 'movie') {
       display = (
-        <Details />
+        <Details handleClick={this.handleClick}/>
       )
     } else {
       display = (

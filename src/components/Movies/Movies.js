@@ -2,7 +2,7 @@ import React from 'react'
 import Card from '../Card/Card'
 import './Movies.css'
 
-function Movies({movies}) {
+function Movies({movies, handleClick}) {
   const movieCollection = movies.map(movie => {
     return (
      <Card
@@ -10,6 +10,7 @@ function Movies({movies}) {
       poster={movie.poster_path}
       title={movie.title}
       rating={movie.average_rating}
+      handleClick={handleClick}
      />
     )
   })
