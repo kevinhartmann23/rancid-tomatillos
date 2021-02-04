@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Movies from '../Movies/Movies'
+import Details from '../Details/Details'
 import movieData from '../../data/movie-data'
 import greenTomato from '../../images/icon-tomato-green.png'
 import './App.css'
@@ -20,7 +21,9 @@ class App extends Component {
     let display
 
     if (this.state.display === 'movie') {
-
+      display = (
+        <Details />
+      )
     } else {
       display = (
         <Movies movies={movieData.movies} handleClick={this.handleClick}/>
