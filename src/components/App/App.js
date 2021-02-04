@@ -9,7 +9,8 @@ class App extends Component {
     super()
     this.state = {
       display: 'all',
-      movies: []
+      movies: [],
+      currentMovie: '',
     }
   }
 
@@ -18,19 +19,23 @@ class App extends Component {
       this.setState({ display: 'all' })
 
     } else {
-      // const movieId = event.target.closest('article').id
-      this.setState({ display: 'movie' })
+      const movieId = event.target.closest('article').id
+      const currentMovie = this.fetchData(`movies/${movieId}`)
+      Promise.all([currentMovie])
+        .then(response => {
+          this.setState({ display: 'movie', currentMovie: response[0].movie })
+        })
     }
   }
 
-  fetchData() {
-    return fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
+  fetchData(input) {
+    return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${input}`)
       .then(response => response.json())
       .catch(error => console.log(error))
   }
 
   componentDidMount = () => {
-    const fetchData = this.fetchData()
+    const fetchData = this.fetchData('movies')
     Promise.all([fetchData])
       .then(response => {
         this.setState({ movies: response[0].movies })
@@ -42,7 +47,7 @@ class App extends Component {
 
     if (this.state.display === 'movie') {
       display = (
-        <Details handleClick={this.handleClick}/>
+        <Details currentMovie={this.state.currentMovie} handleClick={this.handleClick}/>
       )
     } else {
       display = (
