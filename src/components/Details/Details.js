@@ -5,6 +5,7 @@ function formatCurrency(amount) {
   if(amount === 0){
     return 'Not Reported'
   }
+
   return amount.toLocaleString('en-US', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
@@ -19,6 +20,7 @@ export default function Details({currentMovie, handleClick}) {
   const genreList = genres.join(', ')
   const formattedBudget = formatCurrency(budget)
   const formattedRevenue = formatCurrency(revenue)
+  
   return (
     <section className='details'>
       <button id='button-back' onClick={handleClick}>Back</button>
