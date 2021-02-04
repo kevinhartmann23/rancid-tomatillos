@@ -9,7 +9,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      display: 'all' //movie
+      display: 'all'
     }
   }
 
@@ -18,7 +18,7 @@ class App extends Component {
       this.setState({ display: 'all' })
 
     } else {
-      const movieId = event.target.closest('article').id
+      // const movieId = event.target.closest('article').id
       this.setState({ display: 'movie' })
     }
   }
@@ -39,7 +39,7 @@ class App extends Component {
     return (
       <div className='App'>
         <header className='header'>
-          <img className='header-icon' src={greenTomato} />
+          <img className='header-icon' src={greenTomato} alt='tomatillo logo' />
           <h1>RANCID TOMATILLOS</h1>
         </header>
         {display}

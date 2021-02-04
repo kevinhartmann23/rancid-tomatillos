@@ -1,5 +1,8 @@
 .movie {
   border: 1px solid black;
+  border-radius: 1rem;
+  box-shadow: 9px 9px 20px 2px #263238;
+  cursor: pointer;
   margin: 1rem;
   min-height: 300px;
   width: 280px;
@@ -12,9 +15,20 @@
 }
 
 .movie-title {
+  font-style: italic;
+}
 
+.rating-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .movie-rating {
 
+}
+
+.movie-tomato {
+  height: 40px;
+  width: 40px;
 }
