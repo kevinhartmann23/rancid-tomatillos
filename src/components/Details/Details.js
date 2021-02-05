@@ -1,19 +1,37 @@
 import React from 'react'
 import './Details.css'
 
-export default function Details({handleClick}) {
+function formatCurrency(amount) {
+  if(amount === 0){
+    return 'Not Reported'
+  }
+
+  return amount.toLocaleString('en-US', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+    style: 'currency',
+    currency: 'USD'
+  })
+}
+
+export default function Details({currentMovie, handleClick}) {
+  const { title, release_date, overview, genres, budget, revenue, runtime, average_rating } = currentMovie
+  const fixedRating = average_rating.toFixed(1)
+  const genreList = genres.join(', ')
+  const formattedBudget = formatCurrency(budget)
+  const formattedRevenue = formatCurrency(revenue)
+  
   return (
     <section className='details'>
       <button id='button-back' onClick={handleClick}>Back</button>
-      <h2>Money Plane</h2>
-      <p>Release Date: 2020-09-29</p>
-      <p>Overview: A professional thief with $40 million in debt and his family's life on the line must commit one final heist - rob a futuristic airborne casino filled with the world's most dangerous criminals.</p>
-      <p>Genres: Action</p>
-      <p>Budget: $0</p>
-      <p>Revenue: $0</p>
-      <p>Runtime: 82 minutes</p>
-      <p>Tagline: </p>
-      <p>Average Rating: 6.1</p>
+      <h2>{title}</h2>
+      <p>Release Date: {release_date}</p>
+      <p>Overview: {overview}</p>
+      <p>Genres: {genreList}</p>
+      <p>Budget: {formattedBudget}</p>
+      <p>Revenue: {formattedRevenue}</p>
+      <p>Runtime: {runtime} minutes</p>
+      <p>Average Rating: {fixedRating}</p>
     </section>
   )
 }

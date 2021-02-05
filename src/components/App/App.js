@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Movies from '../Movies/Movies'
 import Details from '../Details/Details'
-import movieData from '../../data/movie-data'
 import greenTomato from '../../images/icon-tomato-green.png'
 import './App.css'
 
@@ -9,7 +8,9 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      display: 'all'
+      display: 'all',
+      movies: [],
+      currentMovie: '',
     }
   }
 
@@ -18,9 +19,27 @@ class App extends Component {
       this.setState({ display: 'all' })
 
     } else {
-      // const movieId = event.target.closest('article').id
-      this.setState({ display: 'movie' })
+      const movieId = event.target.closest('article').id
+      const currentMovie = this.fetchData(`movies/${movieId}`)
+      Promise.all([currentMovie])
+        .then(response => {
+          this.setState({ display: 'movie', currentMovie: response[0].movie })
+        })
     }
+  }
+
+  fetchData(input) {
+    return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${input}`)
+      .then(response => response.json())
+      .catch(error => console.log(error))
+  }
+
+  componentDidMount = () => {
+    const fetchData = this.fetchData('movies')
+    Promise.all([fetchData])
+      .then(response => {
+        this.setState({ movies: response[0].movies })
+      })
   }
 
   render() {
@@ -28,11 +47,11 @@ class App extends Component {
 
     if (this.state.display === 'movie') {
       display = (
-        <Details handleClick={this.handleClick}/>
+        <Details currentMovie={this.state.currentMovie} handleClick={this.handleClick}/>
       )
     } else {
       display = (
-        <Movies movies={movieData.movies} handleClick={this.handleClick}/>
+        <Movies movies={this.state.movies} handleClick={this.handleClick}/>
       )
     }
 
