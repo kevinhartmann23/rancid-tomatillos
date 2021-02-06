@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       display: 'all',
       isLoading: false,
-      error: 0,
+      errorStatus: 0,
       movies: [],
       currentMovie: '',
     }
@@ -40,18 +40,19 @@ class App extends Component {
         return response.json()
       })
       .catch(error => {
-        this.setState({ error: fetchResponse })
+        this.setState({ errorStatus: fetchResponse })
       })
   }
 
   handleResponse(response) {
-    if (this.state.error === 0) {
-      this.setState({ movies: response[0].movies })
+    if (this.state.errorStatus === 0) {
+      this.setState({ movies: response[0].movies, isLoading: false })
     }
   }
 
   componentDidMount = () => {
-    const fetchData = this.fetchData('movies')
+    this.setState({ isLoading: true })
+    const fetchData = this.fetchData('movie')
     Promise.all([fetchData])
       .then(response => this.handleResponse(response))
   }
@@ -59,8 +60,8 @@ class App extends Component {
   render() {
     let display
 
-    if (this.state.error > 0) {
-      display = <ErrorMessage status={this.state.error}/>
+    if (this.state.errorStatus > 0) {
+      display = <ErrorMessage status={this.state.errorStatus}/>
     } else if (this.state.display === 'movie') {
       display = (
         <Details currentMovie={this.state.currentMovie} handleClick={this.handleClick}/>
