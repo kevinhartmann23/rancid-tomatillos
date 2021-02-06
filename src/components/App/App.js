@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Movies from '../Movies/Movies'
 import Details from '../Details/Details'
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import greenTomato from '../../images/icon-tomato-green.png'
 import './App.css'
 
@@ -9,6 +10,8 @@ class App extends Component {
     super()
     this.state = {
       display: 'all',
+      isLoading: false,
+      error: 0,
       movies: [],
       currentMovie: '',
     }
@@ -28,24 +31,37 @@ class App extends Component {
     }
   }
 
-  fetchData(input) {
+  fetchData = (input) => {
+    let fetchResponse
+
     return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${input}`)
-      .then(response => response.json())
-      .catch(error => console.log(error))
+      .then(response => {
+        fetchResponse = response.status
+        return response.json()
+      })
+      .catch(error => {
+        this.setState({ error: fetchResponse })
+      })
+  }
+
+  handleResponse(response) {
+    if (this.state.error === 0) {
+      this.setState({ movies: response[0].movies })
+    }
   }
 
   componentDidMount = () => {
     const fetchData = this.fetchData('movies')
     Promise.all([fetchData])
-      .then(response => {
-        this.setState({ movies: response[0].movies })
-      })
+      .then(response => this.handleResponse(response))
   }
 
   render() {
     let display
 
-    if (this.state.display === 'movie') {
+    if (this.state.error > 0) {
+      display = <ErrorMessage status={this.state.error}/>
+    } else if (this.state.display === 'movie') {
       display = (
         <Details currentMovie={this.state.currentMovie} handleClick={this.handleClick}/>
       )
