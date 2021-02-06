@@ -10,6 +10,7 @@ export default function ErrorMessage({ status }) {
         <img src='./error-display.png' alt='error banner'/>
       </div>
     )
+    
   } else if (status > 499) {
     display = (
       <div>
