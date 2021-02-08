@@ -1,4 +1,12 @@
 import React, { Component } from 'react'
+import { 
+  BrowserRouter as Router, 
+  Route, 
+  Link, 
+  Switch, 
+  Redirect
+} from 'react-router-dom'
+
 import Movies from '../Movies/Movies'
 import Details from '../Details/Details'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
@@ -59,33 +67,45 @@ class App extends Component {
   }
 
   render() {
-    let display
+    // let display
 
-    if (this.state.errorStatus > 0) {
-      display = <ErrorMessage status={this.state.errorStatus}/>
+    // if (this.state.errorStatus > 0) {
+    //   display = <ErrorMessage status={this.state.errorStatus}/>
 
-    } else if (this.state.isLoading) {
-      display = <Loading />
+    // } else if (this.state.isLoading) {
+    //   display = <Loading />
 
-    } else if (this.state.display === 'movie') {
-      display = (
-        <Details currentMovie={this.state.currentMovie} handleClick={this.handleClick}/>
-      )
+    // } else if (this.state.display === 'movie') {
+    //   display = (
+    //     <Details currentMovie={this.state.currentMovie} handleClick={this.handleClick}/>
+    //   )
 
-    } else {
-      display = (
-        <Movies movies={this.state.movies} handleClick={this.handleClick}/>
-      )
-    }
+    // } else {
+    //   display = (
+    //     <Movies movies={this.state.movies} handleClick={this.handleClick}/>
+    //   )
+    // }
 
     return (
-      <div className='App'>
-        <header className='header'>
-          <img className='header-icon' src={greenTomato} alt='tomatillo logo' />
-          <h1>RANCID TOMATILLOS</h1>
-        </header>
-        {display}
-      </div>
+      <Router>
+        <div className='App'>
+          <header className='header'>
+            <img className='header-icon' src={greenTomato} alt='tomatillo logo' />
+            <h1>RANCID TOMATILLOS</h1>
+          </header>
+          <Switch>
+            <Route path='/movies/:id' render={() => {
+              return <Details currentMovie={this.state.currentMovie} handleClick={this.handleClick} /> 
+            }}/>
+            <Route path='/error' render={() => {
+             return <ErrorMessage status={this.state.errorStatus} />
+            }}/>
+            <Route path='/' render={() => {
+              return <Movies movies={this.state.movies} handleClick={this.handleClick} /> 
+            }}/>
+          </Switch>
+        </div>
+      </Router>
     )
   }
 }

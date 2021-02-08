@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Card.css'
 import greenTomato from '../../images/icon-tomato-green.png'
 import redTomato from '../../images/icon-tomato-red.png'
@@ -19,6 +20,7 @@ function Card({ id, poster, title, rating, handleClick }) {
      <p className='movie-rating'>{`Rating: ${fixedRating}`}</p>
      <img className='movie-tomato' src={tomatoIcon} alt='tomato icon'/>
    </div>
+   <Link to={`/movies/${id}`}></Link>
   </article>
  )
 }
