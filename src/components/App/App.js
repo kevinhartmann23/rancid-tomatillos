@@ -4,7 +4,8 @@ import {
   Route, 
   Link, 
   Switch, 
-  Redirect
+  Redirect,
+  useParams
 } from 'react-router-dom'
 
 import Movies from '../Movies/Movies'
@@ -49,7 +50,7 @@ class App extends Component {
         return response.json()
       })
       .catch(error => {
-        this.setState({ errorStatus: fetchResponse })
+        this.setState({ errorStatus: fetchResponse, isLoading: false })
       })
   }
 
@@ -86,6 +87,8 @@ class App extends Component {
     //   )
     // }
 
+
+    
     return (
       <Router>
         <div className='App'>
@@ -93,6 +96,12 @@ class App extends Component {
             <img className='header-icon' src={greenTomato} alt='tomatillo logo' />
             <h1>RANCID TOMATILLOS</h1>
           </header>
+          {this.state.errorStatus > 0 && <Redirect push to='/error' />}
+          {this.state.isLoading && <Loading />}
+          {this.state.display === 'movie' ? 
+            <Redirect push to={`/movies/${this.state.currentMovie.id}`} /> :
+            <Redirect push to='/' />
+          }
           <Switch>
             <Route path='/movies/:id' render={() => {
               return <Details currentMovie={this.state.currentMovie} handleClick={this.handleClick} /> 

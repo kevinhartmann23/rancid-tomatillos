@@ -20,7 +20,6 @@ function Card({ id, poster, title, rating, handleClick }) {
      <p className='movie-rating'>{`Rating: ${fixedRating}`}</p>
      <img className='movie-tomato' src={tomatoIcon} alt='tomato icon'/>
    </div>
-   <Link to={`/movies/${id}`}></Link>
   </article>
  )
 }
