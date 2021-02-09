@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
-import { 
-  BrowserRouter as Router, 
-  Route, 
-  Link, 
-  Switch, 
-  Redirect,
-  useParams
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
 } from 'react-router-dom'
-
 import Movies from '../Movies/Movies'
 import Details from '../Details/Details'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
@@ -27,19 +23,13 @@ class App extends Component {
     }
   }
 
-  handleClick = (event) => {
-    if (event.target.id === 'button-back') {
-      this.setState({ display: 'all' })
-
-    } else {
-      const movieId = event.target.closest('article').id
-      const currentMovie = this.fetchData(`movies/${movieId}`)
-      Promise.all([currentMovie])
-        .then(response => {
-          this.setState({ display: 'movie', currentMovie: response[0].movie })
-        })
-    }
-  }
+  // handleClick = (event) => {
+  //   Promise.all([currentMovie])
+  //     .then(response => {
+  //       this.setState({ display: 'movie', currentMovie: response[0].movie })
+  //     })
+  //
+  // }
 
   fetchData = (input) => {
     let fetchResponse
@@ -56,19 +46,17 @@ class App extends Component {
 
   handleResponse(response) {
     if (this.state.errorStatus === 0) {
-      this.setState({ movies: response[0].movies, isLoading: false })
+      this.setState({ movies: response.movies, isLoading: false })
     }
   }
 
   componentDidMount = () => {
     this.setState({ isLoading: true })
     const fetchData = this.fetchData('movies')
-    Promise.all([fetchData])
-      .then(response => this.handleResponse(response))
+    fetchData.then(response => this.handleResponse(response))
   }
 
   render() {
-    
     return (
       <Router>
         <div className='App'>
@@ -76,22 +64,32 @@ class App extends Component {
             <img className='header-icon' src={greenTomato} alt='tomatillo logo' />
             <h1>RANCID TOMATILLOS</h1>
           </header>
-          {this.state.errorStatus > 0 && <Redirect push to='/error' />}
+          {this.state.errorStatus > 0 && <ErrorMessage />}
           {this.state.isLoading && <Loading />}
-          {this.state.display === 'movie' ? 
-            <Redirect push to={`/movies/${this.state.currentMovie.id}`} /> :
-            <Redirect push to='/' />
-          }
           <Switch>
-            <Route path='/movies/:id' render={() => {
-              return <Details currentMovie={this.state.currentMovie} handleClick={this.handleClick} /> 
-            }}/>
-            <Route path='/error' render={() => {
-             return <ErrorMessage status={this.state.errorStatus} />
-            }}/>
-            <Route path='/' render={() => {
-              return <Movies movies={this.state.movies} handleClick={this.handleClick} /> 
-            }}/>
+            <Route
+              path='/movies/:id'
+              render={({ match }) => {
+                const movieId = match.params.id
+                const movieData = this.fetchData(`movies/${movieId}`)
+                movieData.then(response => {
+                  console.log('response', response.movie);
+                  return <Details currentMovie={response.movie} />
+                })
+              }}
+            />
+            <Route
+              path='/error'
+              render={() => {
+                return <ErrorMessage status={this.state.errorStatus} />
+              }}
+            />
+            <Route
+              exact path='/'
+              render={() => {
+                return <Movies movies={this.state.movies} />
+              }}
+            />
           </Switch>
         </div>
       </Router>
