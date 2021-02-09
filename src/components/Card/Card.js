@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Card.css'
 import greenTomato from '../../images/icon-tomato-green.png'
 import redTomato from '../../images/icon-tomato-red.png'
