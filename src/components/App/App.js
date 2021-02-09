@@ -68,26 +68,6 @@ class App extends Component {
   }
 
   render() {
-    // let display
-
-    // if (this.state.errorStatus > 0) {
-    //   display = <ErrorMessage status={this.state.errorStatus}/>
-
-    // } else if (this.state.isLoading) {
-    //   display = <Loading />
-
-    // } else if (this.state.display === 'movie') {
-    //   display = (
-    //     <Details currentMovie={this.state.currentMovie} handleClick={this.handleClick}/>
-    //   )
-
-    // } else {
-    //   display = (
-    //     <Movies movies={this.state.movies} handleClick={this.handleClick}/>
-    //   )
-    // }
-
-
     
     return (
       <Router>
