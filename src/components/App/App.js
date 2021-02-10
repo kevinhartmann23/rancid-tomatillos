@@ -67,16 +67,12 @@ class App extends Component {
             <img className='header-icon' src={greenTomato} alt='tomatillo logo' />
             <h1>RANCID TOMATILLOS</h1>
           </header>
-          {this.state.errorStatus > 0 && <ErrorMessage />}
+          {this.state.errorStatus > 0 && <ErrorMessage status={this.state.errorStatus}/>}
           {this.state.isLoading ? <Loading /> :
             <Switch>
               <Route
                 path='/movies/:id'
                 render={() => <Details currentMovie={this.state.currentMovie} />}
-              />
-              <Route
-                path='/error'
-                render={() => <ErrorMessage status={this.state.errorStatus} />}
               />
               <Route
                 exact path='/'
