@@ -12,16 +12,18 @@ function Card({ id, poster, title, rating, handleClick }) {
     tomatoIcon = redTomato
   }
 
- return (
-  <article className='movie' id={id} onClick={handleClick}>
-   <img className='movie-poster' src={poster} alt={`${title} poster`} />
-   <h1 className='movie-title'>{title}</h1>
-   <div className='rating-container'>
-     <p className='movie-rating'>{`Rating: ${fixedRating}`}</p>
-     <img className='movie-tomato' src={tomatoIcon} alt='tomato icon'/>
-   </div>
-  </article>
- )
+  return (
+    <Link to={`/movies/${id}`}>
+      <article className='movie' id={id} onClick={handleClick}>
+        <img className='movie-poster' src={poster} alt={`${title} poster`} />
+        <h1 className='movie-title'>{title}</h1>
+        <div className='rating-container'>
+          <p className='movie-rating'>{`Rating: ${fixedRating}`}</p>
+          <img className='movie-tomato' src={tomatoIcon} alt='tomato icon'/>
+        </div>
+      </article>
+    </Link>
+  )
 }
 
 export default Card

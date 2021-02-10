@@ -14,16 +14,15 @@ function formatCurrency(amount) {
   })
 }
 
-export default function Details({currentMovie, handleClick}) {
-  const { title, release_date, overview, genres, budget, revenue, runtime, average_rating } = currentMovie
+export default function Details({currentMovie}) {
+  const { title, release_date, backdrop_path, overview, genres, budget, revenue, runtime, average_rating } = currentMovie
   const fixedRating = average_rating.toFixed(1)
   const genreList = genres.join(', ')
   const formattedBudget = formatCurrency(budget)
   const formattedRevenue = formatCurrency(revenue)
-  
+
   return (
     <section className='details'>
-      <button id='button-back' onClick={handleClick}>Back</button>
       <h2>{title}</h2>
       <p>Release Date: {release_date}</p>
       <p>Overview: {overview}</p>
@@ -32,8 +31,9 @@ export default function Details({currentMovie, handleClick}) {
       <p>Revenue: {formattedRevenue}</p>
       <p>Runtime: {runtime} minutes</p>
       <p>Average Rating: {fixedRating}</p>
+      <div className='details-poster'>
+        <img className='poster' src={backdrop_path} alt={title} />
+      </div>
     </section>
   )
 }
-
-// "backdrop_path": "https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg",
