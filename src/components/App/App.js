@@ -23,13 +23,16 @@ class App extends Component {
     }
   }
 
-  // handleClick = (event) => {
-  //   Promise.all([currentMovie])
-  //     .then(response => {
-  //       this.setState({ display: 'movie', currentMovie: response[0].movie })
-  //     })
-  //
-  // }
+  handleClick = (event) => {
+    this.setState({ isLoading: true })
+
+    const movieId = event.target.closest('article').id
+    const movieData = this.fetchData(`movies/${movieId}`)
+
+    movieData.then(response => {
+      this.setState({ currentMovie: response.movie, isLoading: false  })
+    })
+  }
 
   fetchData = (input) => {
     let fetchResponse
@@ -65,32 +68,22 @@ class App extends Component {
             <h1>RANCID TOMATILLOS</h1>
           </header>
           {this.state.errorStatus > 0 && <ErrorMessage />}
-          {this.state.isLoading && <Loading />}
-          <Switch>
-            <Route
-              path='/movies/:id'
-              render={({ match }) => {
-                const movieId = match.params.id
-                const movieData = this.fetchData(`movies/${movieId}`)
-                movieData.then(response => {
-                  console.log('response', response.movie);
-                  return <Details currentMovie={response.movie} />
-                })
-              }}
-            />
-            <Route
-              path='/error'
-              render={() => {
-                return <ErrorMessage status={this.state.errorStatus} />
-              }}
-            />
-            <Route
-              exact path='/'
-              render={() => {
-                return <Movies movies={this.state.movies} />
-              }}
-            />
-          </Switch>
+          {this.state.isLoading ? <Loading /> :
+            <Switch>
+              <Route
+                path='/movies/:id'
+                render={() => <Details currentMovie={this.state.currentMovie} />}
+              />
+              <Route
+                path='/error'
+                render={() => <ErrorMessage status={this.state.errorStatus} />}
+              />
+              <Route
+                exact path='/'
+                render={() => <Movies movies={this.state.movies} handleClick={this.handleClick} />}
+              />
+            </Switch>
+          }
         </div>
       </Router>
     )

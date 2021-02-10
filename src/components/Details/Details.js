@@ -15,7 +15,6 @@ function formatCurrency(amount) {
 }
 
 export default function Details({currentMovie}) {
-  console.log('movie', currentMovie);
   const { title, release_date, backdrop_path, overview, genres, budget, revenue, runtime, average_rating } = currentMovie
   const fixedRating = average_rating.toFixed(1)
   const genreList = genres.join(', ')
