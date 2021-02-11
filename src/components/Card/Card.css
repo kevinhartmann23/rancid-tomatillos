@@ -8,8 +8,8 @@
   flex-direction: column;
   justify-content: space-around;
   margin: 1rem;
-  min-height: 430px;
   padding-top: 0.5rem;
+  height: 430px;
   width: 255px;
 }
 

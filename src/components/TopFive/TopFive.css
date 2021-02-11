@@ -1,13 +1,33 @@
 .topfive {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+}
+
+.topfive-container {
+  background-color: #6A994E;
+  flex-direction: column;
+  display: flex;
+  padding: 0 5rem;
+  text-align: left;
 }
 
 .topfive .movie {
+  padding-top: 1rem;
+  height: 250px;
   width: 150px;
 }
 
 .topfive .movie-poster {
+  height: 210px;
   width: 140px;
+}
+
+.topfive .movie-tomato {
+  height: 18px;
+  width: 18px;
+}
+
+.topfive .rating-text {
+  font-size: 16px;
 }
