@@ -5,10 +5,16 @@
   margin: 1rem;
   padding: 1rem;
   position: relative;
+  max-width: 800px;
+}
+
+.details-wrapper {
+  height: 40%;
+  width: 100%;
 }
 
 .details-poster {
-  height: 600px;
+  height: 60%;
   width: calc(100% + 2rem);
   padding: -1rem;
   margin: 3rem -1rem -1rem -1rem;
@@ -25,7 +31,7 @@
 .details-poster:after {
   content: '';
   background: linear-gradient(to top, transparent 80%, #FBF7EF 100%);
-  height: inherit;
+  height: 60%;
   position: absolute;
   left: 0;
   width: 100%;

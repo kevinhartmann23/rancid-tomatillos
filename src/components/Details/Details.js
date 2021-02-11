@@ -23,14 +23,16 @@ export default function Details({currentMovie}) {
 
   return (
     <section className='details'>
-      <h2>{title}</h2>
-      <p>Release Date: {release_date}</p>
-      <p>Overview: {overview}</p>
-      <p>Genres: {genreList}</p>
-      <p>Budget: {formattedBudget}</p>
-      <p>Revenue: {formattedRevenue}</p>
-      <p>Runtime: {runtime} minutes</p>
-      <p>Average Rating: {fixedRating}</p>
+      <div className='details-wrapper'>
+        <h2 className='details-title'>{title}</h2>
+        <p className='details-date'>Release Date: {release_date}</p>
+        <p className='details-overview'>Overview: {overview}</p>
+        <p className='details-genres'>Genres: {genreList}</p>
+        <p className='details-budget'>Budget: {formattedBudget}</p>
+        <p className='details-revenue'>Revenue: {formattedRevenue}</p>
+        <p className='details-runtime'>Runtime: {runtime} minutes</p>
+        <p className='details-rating'>Average Rating: {fixedRating}</p>
+      </div>
       <div className='details-poster'>
         <img className='poster' src={backdrop_path} alt={title} />
       </div>

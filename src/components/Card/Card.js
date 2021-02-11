@@ -16,7 +16,7 @@ function Card({ id, poster, title, rating, handleClick }) {
     <Link to={`/movies/${id}`}>
       <article className='movie' id={id} onClick={handleClick}>
         <img className='movie-poster' src={poster} alt={`${title} poster`} />
-        <h1 className='movie-title'>{title}</h1>
+        <h2 className='movie-title'>{title}</h2>
         <div className='rating-container'>
           <p className='movie-rating'>{`Rating: ${fixedRating}`}</p>
           <img className='movie-tomato' src={tomatoIcon} alt='tomato icon'/>
