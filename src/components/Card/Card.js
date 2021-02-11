@@ -13,7 +13,7 @@ function Card({ id, poster, title, rating, handleClick }) {
   if (fixedRating < 5) {
     tomatoIcon = redTomato
   }
-  const imageTomato = `<img className='movie-tomato' src=${tomatoIcon} alt='tomato icon' />`
+  const imageTomato = `<img class='movie-tomato' src=${tomatoIcon} alt='tomato icon' />`
 
   const tomatoDisplay = new Array(parseInt(fixedRating))
   tomatoDisplay.fill(imageTomato)
@@ -24,7 +24,8 @@ function Card({ id, poster, title, rating, handleClick }) {
       <article className='movie' id={id} onClick={handleClick}>
         <img className='movie-poster' src={poster} alt={`${title} poster`} />
         <div className='rating-container'>
-          {Parse(tomatoDisplay.join())}
+          {Parse(tomatoDisplay.join(''))}
+          <p className='rating-text'>/10</p> 
         </div>
       </article>
     </Link>

@@ -4,31 +4,41 @@
   box-shadow: 9px 9px 20px 2px #263238;
   cursor: pointer;
   margin: 1rem;
+  padding-top: 0.5rem;
   min-height: 430px;
   width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .movie-poster {
-  height: 280px;
-  width: 200px;
+  height: 350px;
+  width: 260px;
   object-fit: cover;
+  border-radius: 0.5rem;
 }
 
-.movie-title {
-  font-style: italic;
+.movie-tomato {
+  height: 30px;
+  width: 30px;
 }
 
 .rating-container {
+  width: inherit;
   align-items: center;
   display: flex;
   justify-content: center;
 }
 
-.movie-rating {
-
+.rating-text {
+  font-size: 25px;
+  font-weight: bolder;
+  color: black;
 }
 
-.movie-tomato {
-  height: 40px;
-  width: 40px;
+a:link{
+  text-decoration: none;
 }
+
