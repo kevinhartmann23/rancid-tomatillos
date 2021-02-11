@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import Movies from '../Movies/Movies'
 import Details from '../Details/Details'
+import TopFive from '../TopFive/TopFive'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import Loading from '../Loading/Loading'
 import greenTomato from '../../images/icon-tomato-green.png'
@@ -69,16 +70,19 @@ class App extends Component {
           </header>
           {this.state.errorStatus > 0 && <ErrorMessage status={this.state.errorStatus}/>}
           {this.state.isLoading ? <Loading /> :
-            <Switch>
-              <Route
-                path='/movies/:id'
-                render={() => <Details currentMovie={this.state.currentMovie} />}
-              />
-              <Route
-                exact path='/'
-                render={() => <Movies movies={this.state.movies} handleClick={this.handleClick} />}
-              />
-            </Switch>
+            <div>
+              <TopFive movies={this.state.movies} handleClick={this.handleClick} />
+              <Switch>
+                <Route
+                  path='/movies/:id'
+                  render={() => <Details currentMovie={this.state.currentMovie} />}
+                  />
+                <Route
+                  exact path='/'
+                  render={() => <Movies movies={this.state.movies} handleClick={this.handleClick} />}
+                  />
+              </Switch>
+            </div>
           }
         </div>
       </Router>
