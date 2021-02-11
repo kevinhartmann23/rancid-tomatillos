@@ -33,8 +33,10 @@ export default function Details({currentMovie}) {
         <p className='details-runtime'>Runtime: {runtime} minutes</p>
         <p className='details-rating'>Average Rating: {fixedRating}</p>
       </div>
-      <div className='details-poster'>
-        <img className='poster' src={backdrop_path} alt={title} />
+      <div 
+        className='details-image' 
+        style={{ backgroundImage: `linear-gradient(to top, rgba(255,255,255,0), #FBF7EF), url(${backdrop_path})` }}
+      >
       </div>
     </section>
   )
