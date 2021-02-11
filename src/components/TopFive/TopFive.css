@@ -1,0 +1,13 @@
+.topfive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topfive .movie {
+  width: 150px;
+}
+
+.topfive .movie-poster {
+  width: 140px;
+}
