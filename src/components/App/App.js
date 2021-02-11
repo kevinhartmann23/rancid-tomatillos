@@ -70,19 +70,21 @@ class App extends Component {
           </header>
           {this.state.errorStatus > 0 && <ErrorMessage status={this.state.errorStatus}/>}
           {this.state.isLoading ? <Loading /> :
-            <div>
-              <TopFive movies={this.state.movies} handleClick={this.handleClick} />
-              <Switch>
-                <Route
-                  path='/movies/:id'
-                  render={() => <Details currentMovie={this.state.currentMovie} />}
-                  />
-                <Route
-                  exact path='/'
-                  render={() => <Movies movies={this.state.movies} handleClick={this.handleClick} />}
-                  />
-              </Switch>
-            </div>
+            <Switch>
+              <Route
+                path='/movies/:id'
+                render={() => <Details currentMovie={this.state.currentMovie} />}
+                />
+              <Route
+                exact path='/'
+                render={() =>
+                  <div>
+                    <TopFive movies={this.state.movies} handleClick={this.handleClick} />
+                    <Movies movies={this.state.movies} handleClick={this.handleClick} />
+                  </div>
+                }
+              />
+            </Switch>
           }
         </div>
       </Router>
