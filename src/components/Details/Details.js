@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Loading from '../Loading/Loading'
 import './Details.css'
 
 export default class Details extends Component {

@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Link,
   NavLink
 } from 'react-router-dom'
 import Movies from '../Movies/Movies'
