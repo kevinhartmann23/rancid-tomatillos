@@ -9,7 +9,7 @@ import redTomato from '../../images/icon-tomato-red.png'
 function Card({ id, poster, title, rating, handleClick }) {
   const fixedRating = rating.toFixed(0)
   let tomatoIcon = greenTomato
-  
+
   if (fixedRating < 5) {
     tomatoIcon = redTomato
   }
@@ -17,7 +17,6 @@ function Card({ id, poster, title, rating, handleClick }) {
 
   const tomatoDisplay = new Array(parseInt(fixedRating))
   tomatoDisplay.fill(imageTomato)
-  console.log(tomatoDisplay)
 
   return (
     <Link to={`/movies/${id}`}>
@@ -25,7 +24,7 @@ function Card({ id, poster, title, rating, handleClick }) {
         <img className='movie-poster' src={poster} alt={`${title} poster`} />
         <div className='rating-container'>
           {Parse(tomatoDisplay.join(''))}
-          <p className='rating-text'>/10</p> 
+          <p className='rating-text'>/10</p>
         </div>
       </article>
     </Link>

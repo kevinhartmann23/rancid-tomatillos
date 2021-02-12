@@ -2,7 +2,7 @@ import React from 'react'
 import Card from '../Card/Card'
 import './Movies.css'
 
-function Movies({ movies, handleClick }) {
+export default function Movies({ movies, handleClick }) {
   const movieCollection = movies.map(movie => {
     return (
       <Card
@@ -18,9 +18,10 @@ function Movies({ movies, handleClick }) {
 
     return (
       <section className='movie-container'>
-        {movieCollection}
+        <h2 className='section-header'>All Movies</h2>
+        <div className='movies'>
+          {movieCollection}
+        </div>
       </section>
     )
 }
-
-export default Movies
