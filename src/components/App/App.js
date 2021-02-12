@@ -18,25 +18,11 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      isLoading: false,
+      isLoading: true,
       errorStatus: 0,
       movies: [],
       displayedMovies: [],
-      currentMovie: '',
       searchBar: '',
-    }
-  }
-
-  handleClick = (event) => {
-    this.setState({ isLoading: true })
-    const movieId = event.target.closest('article').id
-
-    if (movieId) {
-      const movieData = this.fetchData(`movies/${movieId}`)
-
-      movieData.then(response => {
-        this.setState({ currentMovie: response.movie, isLoading: false  })
-      })
     }
   }
 
@@ -68,15 +54,28 @@ class App extends Component {
       this.setState({
         movies: response.movies,
         displayedMovies: response.movies,
-        isLoading: false
+        isLoading: false,
+      })
+    }
+    window.onpopstate = () => {
+      this.setState(  { 
+        errorStatus: 0, 
+        displayedMovies: response.movies, 
+        movies: response.movies 
       })
     }
   }
 
   componentDidMount = () => {
-    this.setState({ isLoading: true })
     const fetchData = this.fetchData('movies')
     fetchData.then(response => this.handleResponse(response))
+  }
+
+  resetError = (event) => {
+    window.onpopstate = () => {
+        this.setState({ errorStatus: 0 })
+      }
+    this.setState( {errorStatus: 0})
   }
 
   render() {
@@ -99,27 +98,32 @@ class App extends Component {
                   placeholder='Search by movie title'
                 />
               </div>
-              <NavLink exact to='/' className='nav-link'>Home</NavLink>
+              <NavLink exact to='/' className='nav-link' onClick={this.resetError}>Home</NavLink>
             </div>
           </header>
           {this.state.errorStatus > 0 && <ErrorMessage status={this.state.errorStatus}/>}
-          {this.state.isLoading ? <Loading /> :
-            <Switch>
-              <Route
-                path='/movies/:id'
-                render={() => <Details currentMovie={this.state.currentMovie} />}
-                />
-              <Route
-                exact path='/'
-                render={() =>
-                  <div>
-                    <TopFive movies={this.state.movies} handleClick={this.handleClick} />
-                    <Movies movies={this.state.displayedMovies} handleClick={this.handleClick} />
-                  </div>
-                }
+          <Switch>
+            <Route
+              path='/movies/:id'
+              render={({ match }) => {
+                return <Details 
+                  id={match.params.id} 
+                  fetchData={this.fetchData} 
+                  errorStatus={this.state.errorStatus} 
+                />}}
               />
-            </Switch>
-          }
+            {this.state.isLoading ? <Loading /> :
+            <Route
+              exact path='/'
+              render={() =>
+                <div>
+                  <TopFive movies={this.state.movies} />
+                  <Movies movies={this.state.displayedMovies} />
+                </div>
+                }
+                />
+              }
+          </Switch>
         </div>
       </Router>
     )

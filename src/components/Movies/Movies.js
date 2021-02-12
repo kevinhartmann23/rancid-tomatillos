@@ -2,7 +2,7 @@ import React from 'react'
 import Card from '../Card/Card'
 import './Movies.css'
 
-export default function Movies({ movies, handleClick }) {
+export default function Movies({ movies }) {
   const movieCollection = movies.map(movie => {
     return (
       <Card
@@ -11,7 +11,6 @@ export default function Movies({ movies, handleClick }) {
         poster={movie.poster_path}
         title={movie.title}
         rating={movie.average_rating}
-        handleClick={handleClick}
       />
     )
   })

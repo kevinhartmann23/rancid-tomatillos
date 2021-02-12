@@ -2,7 +2,7 @@ import React from 'react'
 import Card from '../Card/Card'
 import './TopFive.css'
 
-export default function TopFive({ movies, handleClick }) {
+export default function TopFive({ movies }) {
   const allMovies = movies.map(movie => movie)
 
   allMovies.sort((a, b) => {
@@ -23,7 +23,6 @@ export default function TopFive({ movies, handleClick }) {
         poster={movie.poster_path}
         title={movie.title}
         rating={movie.average_rating}
-        handleClick={handleClick}
       />
     )
   })
