@@ -1,21 +1,21 @@
 .topfive {
   align-items: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .topfive-container {
   background-color: #6A994E;
   flex-direction: column;
   display: flex;
-  padding: 0 5rem;
   text-align: left;
+  width: 1100px;
 }
 
 .topfive .movie {
   padding-top: 1rem;
   height: 250px;
-  width: 150px;
+  /* width: 150px; */
 }
 
 .topfive .movie-poster {
@@ -30,4 +30,8 @@
 
 .topfive .rating-text {
   font-size: 16px;
+}
+
+.section-header {
+  margin-left: 1rem;
 }

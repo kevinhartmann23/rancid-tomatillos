@@ -4,6 +4,7 @@ import './TopFive.css'
 
 export default function TopFive({ movies, handleClick }) {
   const allMovies = movies.map(movie => movie)
+
   allMovies.sort((a, b) => {
     if (a.average_rating < b.average_rating) {
       return 1
@@ -29,7 +30,7 @@ export default function TopFive({ movies, handleClick }) {
 
   return (
     <section className='topfive-container'>
-      <h2>Top Five Picks:</h2>
+      <h2 className='section-header'>Top Five Picks</h2>
       <div className='topfive'>
         {topFiveCards}
       </div>
