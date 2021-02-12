@@ -18,7 +18,7 @@ class App extends Component {
     super()
     this.state = {
       isLoading: true,
-      errorStatus: 0,
+      error: false,
       movies: [],
       displayedMovies: [],
       searchBar: '',
@@ -49,12 +49,16 @@ class App extends Component {
         return response.json()
       })
       .catch(error => {
-        this.setState({ errorStatus: fetchResponse, isLoading: false })
+        this.setState({
+          errorStatus: fetchResponse,
+          error: true,
+          isLoading: false
+        })
       })
   }
 
   handleResponse(response) {
-    if (this.state.errorStatus === 0) {
+    if (!this.state.error) {
       this.setState({
         movies: response.movies,
         displayedMovies: response.movies,
@@ -64,18 +68,24 @@ class App extends Component {
     window.onpopstate = () => {
       this.setState({
         errorStatus: 0,
+        error: false,
         displayedMovies: response.movies,
         movies: response.movies
       })
     }
   }
 
+  handleError = (error) => {
+    this.setState({ errorMessage: error, error: true })
+    console.log('error',this.state.errorMessage);
+  }
+
   resetError = (event) => {
     window.onpopstate = () => {
-      this.setState({ errorStatus: 0 })
+      this.setState({ errorStatus: 0, error: false })
     }
 
-    this.setState({ errorStatus: 0 })
+    this.setState({ errorStatus: 0, error: false })
   }
 
   render() {
@@ -98,10 +108,20 @@ class App extends Component {
                   placeholder='Search by movie title'
                 />
               </div>
-              <NavLink exact to='/' className='nav-link' onClick={this.resetError}>Home</NavLink>
+              <NavLink
+                exact to='/'
+                className='nav-link'
+                onClick={this.resetError}>
+                Home
+              </NavLink>
             </div>
           </header>
-          {this.state.errorStatus > 0 && <ErrorMessage status={this.state.errorStatus}/>}
+          {this.state.error &&
+            <ErrorMessage
+              status={this.state.errorStatus}
+              message={this.state.errorMessage}
+            />
+          }
           {this.state.isLoading ? <Loading /> :
             <Switch>
               <Route
@@ -111,6 +131,7 @@ class App extends Component {
                     id={match.params.id}
                     fetchData={this.fetchData}
                     errorStatus={this.state.errorStatus}
+                    handleError={this.handleError}
                   />}}
                 />
               <Route
