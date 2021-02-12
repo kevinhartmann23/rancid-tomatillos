@@ -37,3 +37,7 @@
 .navigation-input {
   display: flex;
 }
+
+.nav-link {
+  text-decoration: underline !important;
+}

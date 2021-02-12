@@ -18,10 +18,10 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      display: 'all',
       isLoading: false,
       errorStatus: 0,
       movies: [],
+      displayedMovies: [],
       currentMovie: '',
       searchBar: '',
     }
@@ -40,7 +40,11 @@ class App extends Component {
 
   handleChange = (event) => {
     const { value } = event.target
-    this.setState({ searchBar: value })
+    const filteredMovies = this.state.movies.filter(movie => {
+      return movie.title.toLowerCase().includes(value.toLowerCase())
+    })
+
+    this.setState({ displayedMovies: filteredMovies, searchBar: value })
   }
 
   fetchData = (input) => {
@@ -58,7 +62,11 @@ class App extends Component {
 
   handleResponse(response) {
     if (this.state.errorStatus === 0) {
-      this.setState({ movies: response.movies, isLoading: false })
+      this.setState({
+        movies: response.movies,
+        displayedMovies: response.movies,
+        isLoading: false
+      })
     }
   }
 
@@ -79,16 +87,16 @@ class App extends Component {
             </div>
             <div className='navigation'>
               <div className='navigation-input'>
-                <label for='search'></label>
+                <label htmlFor='search'></label>
                 <input
                   id='search'
                   name='searchBar'
                   value={this.state.searchBar}
                   onChange={this.handleChange}
-                  placeholder='Search by title or genre'
+                  placeholder='Search by movie title'
                 />
               </div>
-              <NavLink exact to="/" className="nav">Home</NavLink>
+              <NavLink exact to='/' className='nav-link'>Home</NavLink>
             </div>
           </header>
           {this.state.errorStatus > 0 && <ErrorMessage status={this.state.errorStatus}/>}
@@ -103,7 +111,7 @@ class App extends Component {
                 render={() =>
                   <div>
                     <TopFive movies={this.state.movies} handleClick={this.handleClick} />
-                    <Movies movies={this.state.movies} handleClick={this.handleClick} />
+                    <Movies movies={this.state.displayedMovies} handleClick={this.handleClick} />
                   </div>
                 }
               />
