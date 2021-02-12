@@ -1,30 +1,27 @@
 import React from 'react'
 import './ErrorMessage.css'
-import errorImage from '../../images/error-display.png'
+import errorBanner from '../../images/error-banner.png'
+import errorGhostLarge from '../../images/error-ghost-large.png'
+import errorGhostSmall from '../../images/error-ghost-small.png'
 
 export default function ErrorMessage({ status }) {
-  let display
+  let errorMessage
 
   if (status > 399 && status < 500) {
-    display = (
-      <div>
-        <p>Domain unavailable, please try again.</p>
-        <img src={errorImage} alt='error banner'/>
-      </div>
-    )
-    
+    errorMessage = <h2>Domain unavailable, please try again.</h2>
+
   } else if (status > 499) {
-    display = (
-      <div>
-        <p>Server unavailable, please refresh the page.</p>
-        <img src={errorImage} alt='error banner'/>
-      </div>
-    )
+    errorMessage = <h2>Server unavailable, please refresh the page.</h2>
   }
 
   return (
     <section>
-      {display}
+      {errorMessage}
+      <div className='error-container'>
+        <img className='error-banner' src={errorBanner} alt='error banner'/>
+        <img className='error-ghost-large' src={errorGhostLarge} alt='error banner'/>
+        <img className='error-ghost-small' src={errorGhostSmall} alt='error banner'/>
+      </div>
       <h2 className='error-message'>Error Status:</h2>
       <h2 className='error-message'>{status}</h2>
     </section>
