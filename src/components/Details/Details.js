@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Loading from '../Loading/Loading'
-import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import './Details.css'
 
 export default class Details extends Component {
@@ -14,13 +13,16 @@ export default class Details extends Component {
 
   componentDidMount() {
     this.setState({ isLoading: true })
-    const movieResponse = this.props.fetchData(`movies/${this.props.id}`)
+    
+    const movieResponse = this.props.fetchData(`movie/${this.props.id}`)
+    
     movieResponse.then(data => {
       if(this.props.errorStatus < 300) {
         this.setState({ currentMovie: data.movie, isLoading: false })
       }
     })
   }
+
   formatCurrency(amount) {
     if (amount === 0) {
       return 'Not Reported'
@@ -41,14 +43,13 @@ export default class Details extends Component {
     let formattedBudget
     let formattedRevenue
     
-    if(!this.state.isLoading) {
+    if (!this.state.isLoading) {
       fixedRating = average_rating.toFixed(1)
       genreList = genres.join(', ')
       formattedBudget = this.formatCurrency(budget)
       formattedRevenue = this.formatCurrency(revenue)
     }
     
-
     return (
       <div>
         {this.state.isLoading ? <Loading /> :

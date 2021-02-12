@@ -1,4 +1,6 @@
 import React from 'react'
+import './ErrorMessage.css'
+import errorImage from '../../images/error-display.png'
 
 export default function ErrorMessage({ status }) {
   let display
@@ -7,7 +9,7 @@ export default function ErrorMessage({ status }) {
     display = (
       <div>
         <p>Domain unavailable, please try again.</p>
-        <img src='./error-display.png' alt='error banner'/>
+        <img src={errorImage} alt='error banner'/>
       </div>
     )
     
@@ -15,7 +17,7 @@ export default function ErrorMessage({ status }) {
     display = (
       <div>
         <p>Server unavailable, please refresh the page.</p>
-        <img src='./error-display.png' alt='error banner'/>
+        <img src={errorImage} alt='error banner'/>
       </div>
     )
   }
