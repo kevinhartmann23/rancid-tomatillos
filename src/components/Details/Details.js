@@ -1,22 +1,25 @@
 import React, { Component } from 'react'
 import Loading from '../Loading/Loading'
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import './Details.css'
 
 export default class Details extends Component {
   constructor() {
     super()
     this.state = {
-      isLoading: true,
-      // errorStatus: 0,
-      currentMovie: ''
+      currentMovie: '',
+      isLoading: true
     }
   }
 
   componentDidMount() {
-    const movieResponse = this.props.fetchData(`movie/${this.props.id}`)
+    this.setState({ isLoading: true })
+    const movieResponse = this.props.fetchData(`movies/${this.props.id}`)
     movieResponse.then(data => {
+      if(this.props.errorStatus < 300) {
         this.setState({ currentMovie: data.movie, isLoading: false })
-      })
+      }
+    })
   }
   formatCurrency(amount) {
     if (amount === 0) {
@@ -32,14 +35,13 @@ export default class Details extends Component {
   }
   
   render() {
-    console.log(this.props.errorStatus)
     const { title, release_date, backdrop_path, overview, genres, budget, revenue, runtime, average_rating } = this.state.currentMovie
     let fixedRating
     let genreList
     let formattedBudget
     let formattedRevenue
     
-    if(!this.state.isLoading && this.props.errorStatus === 0) {
+    if(!this.state.isLoading) {
       fixedRating = average_rating.toFixed(1)
       genreList = genres.join(', ')
       formattedBudget = this.formatCurrency(budget)

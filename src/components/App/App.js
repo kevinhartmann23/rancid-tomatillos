@@ -18,8 +18,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      isLoading: false,
-      // errorStatus: 0,
+      isLoading: true,
+      errorStatus: 0,
       movies: [],
       displayedMovies: [],
       searchBar: '',
@@ -60,7 +60,6 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    this.setState({ isLoading: true })
     const fetchData = this.fetchData('movies')
     fetchData.then(response => this.handleResponse(response))
   }
@@ -92,7 +91,12 @@ class App extends Component {
           <Switch>
             <Route
               path='/movies/:id'
-              render={({ match }) => <Details id={match.params.id} fetchData={this.fetchData} errorStatus={this.state.errorStatus} />}
+              render={({ match }) => {
+                return <Details 
+                  id={match.params.id} 
+                  fetchData={this.fetchData} 
+                  errorStatus={this.state.errorStatus} 
+                />}}
               />
             {this.state.isLoading ? <Loading /> :
             <Route
