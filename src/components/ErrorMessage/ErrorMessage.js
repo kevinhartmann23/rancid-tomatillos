@@ -24,10 +24,7 @@ export default function ErrorMessage({ status, message }) {
         <img className='error-banner' src={errorBanner} alt='error banner'/>
         <img className='error-ghost-large' src={errorGhostLarge} alt='error banner'/>
         <img className='error-ghost-small' src={errorGhostSmall} alt='error banner'/>
-        <div className='error-message'>
-          <h2 className='error-message-top'>Error Status:</h2>
-          <h2 className='error-message-bottom'>{status}</h2>
-        </div>
+        <h2 className='error-message'>Error Status: {status}</h2>
       </div>
     </section>
   )

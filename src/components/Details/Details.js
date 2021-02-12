@@ -16,8 +16,9 @@ export default class Details extends Component {
     movieResponse.then(data => {
       if (data && data.error) {
         this.props.handleError(data.error)
+      }
 
-      } else if (this.props.errorStatus < 300) {
+      if (!this.props.error) {
         this.setState({ currentMovie: data.movie, isLoading: false })
       }
     })

@@ -27,29 +27,10 @@
 
 .error-message {
   color: #BC4749;
-  font-size: 34px;
-  font-weight: bold;
-  line-height: 1.35;
-  left: 50%;
-  top: 37%;
-  width: 80%;
-}
-
-/*
-.error-message-top,
-.error-message-bottom {
-  color: #BC4749;
   font-size: 36px;
   font-weight: bold;
-  left: 50%;
-} */
-
-/* .error-message-top {
-  top: 20%;
-}
-
-.error-message-bottom {
   line-height: 1.6;
-  top: 36%;
-  justify-content: flex-start;
-} */
+  left: 50%;
+  top: 29%;
+  width: 70%;
+}

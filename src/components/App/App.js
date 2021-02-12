@@ -19,6 +19,7 @@ class App extends Component {
     this.state = {
       isLoading: true,
       error: false,
+      errorStatus: 0,
       movies: [],
       displayedMovies: [],
       searchBar: '',
@@ -77,7 +78,6 @@ class App extends Component {
 
   handleError = (error) => {
     this.setState({ errorMessage: error, error: true })
-    console.log('error',this.state.errorMessage);
   }
 
   resetError = (event) => {
@@ -130,6 +130,7 @@ class App extends Component {
                   return <Details
                     id={match.params.id}
                     fetchData={this.fetchData}
+                    error={this.state.error}
                     errorStatus={this.state.errorStatus}
                     handleError={this.handleError}
                   />}}
