@@ -58,10 +58,10 @@ class App extends Component {
       })
     }
     window.onpopstate = () => {
-      this.setState(  { 
-        errorStatus: 0, 
-        displayedMovies: response.movies, 
-        movies: response.movies 
+      this.setState(  {
+        errorStatus: 0,
+        displayedMovies: response.movies,
+        movies: response.movies
       })
     }
   }
@@ -102,28 +102,28 @@ class App extends Component {
             </div>
           </header>
           {this.state.errorStatus > 0 && <ErrorMessage status={this.state.errorStatus}/>}
-          <Switch>
-            <Route
-              path='/movies/:id'
-              render={({ match }) => {
-                return <Details 
-                  id={match.params.id} 
-                  fetchData={this.fetchData} 
-                  errorStatus={this.state.errorStatus} 
-                />}}
-              />
-            {this.state.isLoading ? <Loading /> :
-            <Route
-              exact path='/'
-              render={() =>
-                <div>
-                  <TopFive movies={this.state.movies} />
-                  <Movies movies={this.state.displayedMovies} />
-                </div>
-                }
+          {this.state.isLoading ? <Loading /> :
+            <Switch>
+              <Route
+                path='/movies/:id'
+                render={({ match }) => {
+                  return <Details
+                    id={match.params.id}
+                    fetchData={this.fetchData}
+                    errorStatus={this.state.errorStatus}
+                  />}}
                 />
-              }
-          </Switch>
+              <Route
+                exact path='/'
+                render={() =>
+                  <div>
+                    <TopFive movies={this.state.movies} />
+                    <Movies movies={this.state.displayedMovies} />
+                  </div>
+                }
+              />
+            </Switch>
+          }
         </div>
       </Router>
     )
