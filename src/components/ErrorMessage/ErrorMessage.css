@@ -1,0 +1,43 @@
+.error-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.error-container {
+  position: relative;
+}
+
+.error-ghost-large,
+.error-ghost-small,
+.error-message-top,
+.error-message-bottom {
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.error-ghost-large {
+  top: 40%;
+  left: 9%;
+}
+
+.error-ghost-small {
+  top: 40%;
+  left: 90%;
+}
+
+.error-message-top,
+.error-message-bottom {
+  color: #BC4749;
+  font-size: 36px;
+  font-weight: bold;
+  left: 50%;
+}
+
+.error-message-top {
+  top: 20%;
+}
+
+.error-message-bottom {
+  top: 31%;
+}

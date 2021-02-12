@@ -35,6 +35,11 @@ class App extends Component {
     this.setState({ displayedMovies: filteredMovies, searchBar: value })
   }
 
+  componentDidMount = () => {
+    const fetchData = this.fetchData('movies')
+    fetchData.then(response => this.handleResponse(response))
+  }
+
   fetchData = (input) => {
     let fetchResponse
 
@@ -57,7 +62,7 @@ class App extends Component {
       })
     }
     window.onpopstate = () => {
-      this.setState(  {
+      this.setState({
         errorStatus: 0,
         displayedMovies: response.movies,
         movies: response.movies
@@ -65,16 +70,12 @@ class App extends Component {
     }
   }
 
-  componentDidMount = () => {
-    const fetchData = this.fetchData('movies')
-    fetchData.then(response => this.handleResponse(response))
-  }
-
   resetError = (event) => {
     window.onpopstate = () => {
-        this.setState({ errorStatus: 0 })
-      }
-    this.setState( {errorStatus: 0})
+      this.setState({ errorStatus: 0 })
+    }
+
+    this.setState({ errorStatus: 0 })
   }
 
   render() {
