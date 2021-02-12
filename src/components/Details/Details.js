@@ -14,7 +14,7 @@ export default class Details extends Component {
   componentDidMount() {
     this.setState({ isLoading: true })
     
-    const movieResponse = this.props.fetchData(`movie/${this.props.id}`)
+    const movieResponse = this.props.fetchData(`movies/${this.props.id}`)
     
     movieResponse.then(data => {
       if(this.props.errorStatus < 300) {
