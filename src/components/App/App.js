@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  Link,
+  NavLink
 } from 'react-router-dom'
 import Movies from '../Movies/Movies'
 import Details from '../Details/Details'
@@ -21,6 +23,7 @@ class App extends Component {
       errorStatus: 0,
       movies: [],
       currentMovie: '',
+      searchBar: '',
     }
   }
 
@@ -33,6 +36,11 @@ class App extends Component {
     movieData.then(response => {
       this.setState({ currentMovie: response.movie, isLoading: false  })
     })
+  }
+
+  handleChange = (event) => {
+    const { value } = event.target
+    this.setState({ searchBar: value })
   }
 
   fetchData = (input) => {
@@ -65,8 +73,23 @@ class App extends Component {
       <Router>
         <div className='App'>
           <header className='header'>
-            <img className='header-icon' src={greenTomato} alt='tomatillo logo' />
-            <h1>RANCID TOMATILLOS</h1>
+            <div className='header-company'>
+              <img className='header-icon' src={greenTomato} alt='tomatillo logo' />
+              <h1>RANCID TOMATILLOS</h1>
+            </div>
+            <div className='navigation'>
+              <div className='navigation-input'>
+                <label for='search'></label>
+                <input
+                  id='search'
+                  name='searchBar'
+                  value={this.state.searchBar}
+                  onChange={this.handleChange}
+                  placeholder='Search by title or genre'
+                />
+              </div>
+              <NavLink exact to="/" className="nav">Home</NavLink>
+            </div>
           </header>
           {this.state.errorStatus > 0 && <ErrorMessage status={this.state.errorStatus}/>}
           {this.state.isLoading ? <Loading /> :

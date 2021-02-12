@@ -18,7 +18,10 @@ export default function Movies({ movies, handleClick }) {
 
     return (
       <section className='movie-container'>
-        {movieCollection}
+        <h2 className='section-header'>All Movies</h2>
+        <div className='movies'>
+          {movieCollection}
+        </div>
       </section>
     )
 }
