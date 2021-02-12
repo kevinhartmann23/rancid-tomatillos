@@ -29,17 +29,20 @@ class App extends Component {
 
   handleClick = (event) => {
     this.setState({ isLoading: true })
-
     const movieId = event.target.closest('article').id
-    const movieData = this.fetchData(`movies/${movieId}`)
 
-    movieData.then(response => {
-      this.setState({ currentMovie: response.movie, isLoading: false  })
-    })
+    if (movieId) {
+      const movieData = this.fetchData(`movies/${movieId}`)
+
+      movieData.then(response => {
+        this.setState({ currentMovie: response.movie, isLoading: false  })
+      })
+    }
   }
 
   handleChange = (event) => {
     const { value } = event.target
+
     const filteredMovies = this.state.movies.filter(movie => {
       return movie.title.toLowerCase().includes(value.toLowerCase())
     })

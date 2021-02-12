@@ -12,9 +12,7 @@
 }
 
 .topfive .movie {
-  padding-top: 1rem;
   height: 250px;
-  /* width: 150px; */
 }
 
 .topfive .movie-poster {
