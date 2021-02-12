@@ -19,24 +19,10 @@ class App extends Component {
     super()
     this.state = {
       isLoading: false,
-      errorStatus: 0,
+      // errorStatus: 0,
       movies: [],
       displayedMovies: [],
-      currentMovie: '',
       searchBar: '',
-    }
-  }
-
-  handleClick = (event) => {
-    this.setState({ isLoading: true })
-    const movieId = event.target.closest('article').id
-
-    if (movieId) {
-      const movieData = this.fetchData(`movies/${movieId}`)
-
-      movieData.then(response => {
-        this.setState({ currentMovie: response.movie, isLoading: false  })
-      })
     }
   }
 
@@ -103,23 +89,23 @@ class App extends Component {
             </div>
           </header>
           {this.state.errorStatus > 0 && <ErrorMessage status={this.state.errorStatus}/>}
-          {this.state.isLoading ? <Loading /> :
-            <Switch>
-              <Route
-                path='/movies/:id'
-                render={() => <Details currentMovie={this.state.currentMovie} />}
-                />
-              <Route
-                exact path='/'
-                render={() =>
-                  <div>
-                    <TopFive movies={this.state.movies} handleClick={this.handleClick} />
-                    <Movies movies={this.state.displayedMovies} handleClick={this.handleClick} />
-                  </div>
-                }
+          <Switch>
+            <Route
+              path='/movies/:id'
+              render={({ match }) => <Details id={match.params.id} fetchData={this.fetchData} errorStatus={this.state.errorStatus} />}
               />
-            </Switch>
-          }
+            {this.state.isLoading ? <Loading /> :
+            <Route
+              exact path='/'
+              render={() =>
+                <div>
+                  <TopFive movies={this.state.movies} />
+                  <Movies movies={this.state.displayedMovies} />
+                </div>
+                }
+                />
+              }
+          </Switch>
         </div>
       </Router>
     )
