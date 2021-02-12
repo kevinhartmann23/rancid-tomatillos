@@ -54,7 +54,14 @@ class App extends Component {
       this.setState({
         movies: response.movies,
         displayedMovies: response.movies,
-        isLoading: false
+        isLoading: false,
+      })
+    }
+    window.onpopstate = () => {
+      this.setState(  { 
+        errorStatus: 0, 
+        displayedMovies: response.movies, 
+        movies: response.movies 
       })
     }
   }
@@ -62,6 +69,13 @@ class App extends Component {
   componentDidMount = () => {
     const fetchData = this.fetchData('movies')
     fetchData.then(response => this.handleResponse(response))
+  }
+
+  resetError = (event) => {
+    window.onpopstate = () => {
+        this.setState({ errorStatus: 0 })
+      }
+    this.setState( {errorStatus: 0})
   }
 
   render() {
@@ -84,7 +98,7 @@ class App extends Component {
                   placeholder='Search by movie title'
                 />
               </div>
-              <NavLink exact to='/' className='nav-link'>Home</NavLink>
+              <NavLink exact to='/' className='nav-link' onClick={this.resetError}>Home</NavLink>
             </div>
           </header>
           {this.state.errorStatus > 0 && <ErrorMessage status={this.state.errorStatus}/>}
