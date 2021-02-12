@@ -11,8 +11,6 @@ export default class Details extends Component {
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true })
-
     const movieResponse = this.props.fetchData(`movies/${this.props.id}`)
 
     movieResponse.then(data => {
