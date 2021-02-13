@@ -9,13 +9,13 @@
 
 @keyframes ellipsis {
   to {
-    width: 1em;    
+    width: .6em;    
   }
 }
 
 @-webkit-keyframes ellipsis {
   to {
-    width: 1em;    
+    width: .6em;    
   }
 }
 
@@ -23,26 +23,33 @@
   font-size: 2.5em;
   margin-top: 2em;
   margin-bottom: 0em;
-  position: fixed;
-  top: 30vh;
-  left: 44vw;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 30%;
+  left: 50%;
 }
 
 .loading:after {
   overflow: hidden;
   display: inline-block;
   vertical-align: bottom;
-  -webkit-animation: ellipsis steps(4,end) 900ms infinite;      
-  animation: ellipsis steps(4,end) 900ms infinite;
+  -webkit-animation: ellipsis steps(4,end) 1200ms infinite;      
+  animation: ellipsis steps(4,end) 1200ms infinite;
   content: "\2026"; /* ascii code for the ellipsis character */
   width: 0px;
 }
 
 .loading-container {
-  height: 80vh;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.loading-wrapper {
+  position: relative;
 }
 
 .tomato-splat {
