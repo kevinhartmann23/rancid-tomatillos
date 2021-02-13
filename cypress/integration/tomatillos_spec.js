@@ -1,4 +1,3 @@
-// import { isElementOfType } from "react-dom/test-utils"
 
 const baseUrl = 'http://localhost:3000/'
 const apiUrl = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
@@ -14,6 +13,7 @@ describe('Rancid Tomatillos Home Page', () => {
           .find('img').should('be.visible')
           .get('h1').should('have.text', 'RANCID TOMATILLOS')
           .get('input').should('have.attr', 'placeholder').should('include', 'by Movie Title')
+          .get('input').should('have.value', '')
         .get('.navigation a').should('have.text', 'Home')      
   })
     
@@ -62,7 +62,7 @@ describe('Individual Movie Details', () => {
   it('should be able to click anywhere on a movie card on the home page to view more details', () => {
     cy.intercept('GET', `${apiUrl}/694919`, { fixture: 'movie-money-plane' })
 
-    cy.get('.movies article:first').click().as('clickButton')
+    cy.get('.movies article:first').click()
 
       .get('h2').should('have.text', 'Money Plane')
       .get('.details-date').should('contain', 'Release Date:')
@@ -95,7 +95,35 @@ describe('Search Movie Functionality', () => {
       .get('.movies article:first .rating-container').children().should('have.length', 6)
   })
 
-  it('search input value should clear out after visiting a card or selecting home page', () => {
+  it.skip('search input value and filtered movies should clear out after clicking home page nav-link', () => {
+      cy
+        .get('.nav-link').click()     
+        .get('input').should('have.value', '')
+        .get('.movies article:first img').should('have.attr', 'src').should('include', 'https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg')
+        .get('.movies article:first .rating-container').children().should('have.length', 8)
+  })
 
+  it.skip('search input value and filtered movies should clear out selecting a filtered movie to view details', () => {
+    cy
+      .get('.movies article:first').click()
+      .get('input').should('have.value', '')
+      .get('.nav-link').click()   
+      .get('input').should('have.value', '')
+      .get('.movies article:first img').should('have.attr', 'src').should('include', 'https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg')
+      .get('.movies article:first .rating-container').children().should('have.length', 8)
   })
 })
+
+// describe('Loading Page Display', () => {
+//   it('should display an loading message when fetching data from api on page load', () => {
+//     cy.intercept('GET', apiUrl, { fixture: 'allMovies', delay: 1000 })
+      
+//     cy.visit(baseUrl)
+      
+//   })
+
+//   it('should display loading message when fetching individual movie data for movie details page', () => {
+//     cy.intercept('GET', `${apiUrl}/694919`, { fixture: 'movie-money-plane', delay: 1000 }).as('singleMovie')
+//     .get('.movies article:first').click()
+//   })
+// })
