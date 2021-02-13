@@ -54,22 +54,24 @@ export default class Details extends Component {
     return (
       <>
         {!this.state.isLoading &&
-          <section className='details'>
-            <div className='details-wrapper'>
-              <h2 className='details-title'>{title}</h2>
-              <p className='details-date'>Release Date: {release_date}</p>
-              <p className='details-overview'>Overview: {overview}</p>
-              <p className='details-genres'>Genres: {genreList}</p>
-              <p className='details-budget'>Budget: {formattedBudget}</p>
-              <p className='details-revenue'>Revenue: {formattedRevenue}</p>
-              <p className='details-runtime'>Runtime: {runtime} minutes</p>
-              <p className='details-rating'>Average Rating: {fixedRating}</p>
-            </div>
-            <div
-              className='details-image'
-              style={{ backgroundImage: `linear-gradient(to top, rgba(255,255,255,0), #FBF7EF), url(${backdrop_path})` }}
-            >
-            </div>
+          <section className='details-container'>
+            <article className='details'>
+              <div className='details-text'>
+                <h2 className='details-title'>{title}</h2>
+                <p className='details-date'><span>Release Date:</span> {release_date}</p>
+                <p className='details-overview'><span>Overview:</span> {overview}</p>
+                <p className='details-genres'><span>Genres:</span> {genreList}</p>
+                <p className='details-budget'><span>Budget:</span> {formattedBudget}</p>
+                <p className='details-revenue'><span>Revenue:</span> {formattedRevenue}</p>
+                <p className='details-runtime'><span>Runtime:</span> {runtime} minutes</p>
+                <p className='details-rating'><span>Average Rating:</span> {fixedRating}</p>
+              </div>
+              <div
+                className='details-image'
+                style={{ backgroundImage: `linear-gradient(to top, rgba(255,255,255,0), #FBF7EF), url(${backdrop_path})` }}
+                >
+              </div>
+            </article>
           </section>
         }
       </>

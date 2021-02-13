@@ -2,14 +2,22 @@
   background-color: #FBF7EF;
   box-shadow: 9px 9px 20px 2px #263238;
   border-radius: 0.5rem;
-  height: 80vh;
+  height: 75vh;
   width: 90%;
   max-width: 800px;
   text-align: left;
   margin: 1rem 1rem 3rem 1rem;
 }
 
-.details-wrapper {
+.details-container {
+  align-items: center;
+  background-color: #FBF7EF;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.details-text {
   height: 30%;
   width: 95%;
   padding: 1em 1em 0em 1em;
@@ -23,4 +31,8 @@
   background-repeat: no-repeat;
   border-bottom-left-radius: .5em;
   border-bottom-right-radius: .5em;
+}
+
+span {
+  font-weight: bold;
 }
