@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Loading from '../Loading/Loading'
 import './Details.css'
 
 export default class Details extends Component {
@@ -13,9 +12,13 @@ export default class Details extends Component {
 
   componentDidMount() {
     const movieResponse = this.props.fetchData(`movies/${this.props.id}`)
-    
+
     movieResponse.then(data => {
-      if(this.props.errorStatus < 300) {
+      if (data && data.error) {
+        this.props.handleError(data.error)
+      }
+
+      if (!this.props.error) {
         this.setState({ currentMovie: data.movie, isLoading: false })
       }
     })
@@ -25,7 +28,7 @@ export default class Details extends Component {
     if (amount === 0) {
       return 'Not Reported'
     }
-    
+
     return amount.toLocaleString('en-US', {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
@@ -33,24 +36,24 @@ export default class Details extends Component {
       currency: 'USD'
     })
   }
-  
+
   render() {
     const { title, release_date, backdrop_path, overview, genres, budget, revenue, runtime, average_rating } = this.state.currentMovie
     let fixedRating
     let genreList
     let formattedBudget
     let formattedRevenue
-    
+
     if (!this.state.isLoading) {
       fixedRating = average_rating.toFixed(1)
       genreList = genres.join(', ')
       formattedBudget = this.formatCurrency(budget)
       formattedRevenue = this.formatCurrency(revenue)
     }
-    
+
     return (
-      <div>
-        {this.state.isLoading ? <Loading /> :
+      <>
+        {!this.state.isLoading &&
           <section className='details'>
             <div className='details-wrapper'>
               <h2 className='details-title'>{title}</h2>
@@ -62,14 +65,14 @@ export default class Details extends Component {
               <p className='details-runtime'>Runtime: {runtime} minutes</p>
               <p className='details-rating'>Average Rating: {fixedRating}</p>
             </div>
-            <div 
-              className='details-image' 
+            <div
+              className='details-image'
               style={{ backgroundImage: `linear-gradient(to top, rgba(255,255,255,0), #FBF7EF), url(${backdrop_path})` }}
             >
             </div>
           </section>
         }
-      </div>
+      </>
     )
   }
 }

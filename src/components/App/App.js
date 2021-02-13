@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-  NavLink
+  Route
 } from 'react-router-dom'
+import NavBar from '../NavBar/NavBar'
 import Movies from '../Movies/Movies'
 import Details from '../Details/Details'
 import TopFive from '../TopFive/TopFive'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import Loading from '../Loading/Loading'
-import greenTomato from '../../images/icon-tomato-green.png'
 import './App.css'
 
 class App extends Component {
@@ -19,6 +16,7 @@ class App extends Component {
     super()
     this.state = {
       isLoading: true,
+      error: false,
       errorStatus: 0,
       movies: [],
       displayedMovies: [],
@@ -36,6 +34,11 @@ class App extends Component {
     this.setState({ displayedMovies: filteredMovies, searchBar: value })
   }
 
+  componentDidMount = () => {
+    const fetchData = this.fetchData('movies')
+    fetchData.then(response => this.handleResponse(response))
+  }
+
   fetchData = (input) => {
     let fetchResponse
 
@@ -45,12 +48,16 @@ class App extends Component {
         return response.json()
       })
       .catch(error => {
-        this.setState({ errorStatus: fetchResponse, isLoading: false })
+        this.setState({
+          errorStatus: fetchResponse,
+          error: true,
+          isLoading: false
+        })
       })
   }
 
   handleResponse(response) {
-    if (this.state.errorStatus === 0) {
+    if (!this.state.error) {
       this.setState({
         movies: response.movies,
         displayedMovies: response.movies,
@@ -58,72 +65,66 @@ class App extends Component {
       })
     }
     window.onpopstate = () => {
-      this.setState(  { 
-        errorStatus: 0, 
-        displayedMovies: response.movies, 
-        movies: response.movies 
+      this.setState({
+        errorStatus: 0,
+        error: false,
+        displayedMovies: response.movies,
+        movies: response.movies
       })
     }
   }
 
-  componentDidMount = () => {
-    const fetchData = this.fetchData('movies')
-    fetchData.then(response => this.handleResponse(response))
+  handleError = (error) => {
+    this.setState({ errorMessage: error, error: true })
   }
 
   resetError = (event) => {
     window.onpopstate = () => {
-        this.setState({ errorStatus: 0 })
-      }
-    this.setState( {errorStatus: 0})
+      this.setState({ errorStatus: 0, error: false })
+    }
+
+    this.setState({ errorStatus: 0, error: false })
   }
 
   render() {
     return (
       <Router>
         <div className='App'>
-          <header className='header'>
-            <div className='header-company'>
-              <img className='header-icon' src={greenTomato} alt='tomatillo logo' />
-              <h1>RANCID TOMATILLOS</h1>
-            </div>
-            <div className='navigation'>
-              <div className='navigation-input'>
-                <label htmlFor='search'></label>
-                <input
-                  id='search'
-                  name='searchBar'
-                  value={this.state.searchBar}
-                  onChange={this.handleChange}
-                  placeholder='Search by movie title'
+          <NavBar
+            searchBar={this.state.searchBar}
+            handleChange={this.handleChange}
+            resetError={this.resetError}
+          />
+          {this.state.error &&
+            <ErrorMessage
+              status={this.state.errorStatus}
+              message={this.state.errorMessage}
+            />
+          }
+          {this.state.isLoading ? <Loading /> :
+            <>
+              <Route
+                path='/movies/:id'
+                render={({ match }) => {
+                  return <Details
+                    id={match.params.id}
+                    fetchData={this.fetchData}
+                    error={this.state.error}
+                    errorStatus={this.state.errorStatus}
+                    handleError={this.handleError}
+                  />}}
                 />
-              </div>
-              <NavLink exact to='/' className='nav-link' onClick={this.resetError}>Home</NavLink>
-            </div>
-          </header>
-          {this.state.errorStatus > 0 && <ErrorMessage status={this.state.errorStatus}/>}
-          <Switch>
-            <Route
-              path='/movies/:id'
-              render={({ match }) => {
-                return <Details 
-                  id={match.params.id} 
-                  fetchData={this.fetchData} 
-                  errorStatus={this.state.errorStatus} 
-                />}}
-              />
-            {this.state.isLoading ? <Loading /> :
-            <Route
-              exact path='/'
-              render={() =>
-                <div>
-                  <TopFive movies={this.state.movies} />
-                  <Movies movies={this.state.displayedMovies} />
-                </div>
+              <Route
+                exact path='/'
+                render={() =>
+                  <div>
+                    <TopFive movies={this.state.movies} />
+                    <Movies movies={this.state.displayedMovies} />
+                  </div>
                 }
-                />
-              }
-          </Switch>
+              />
+            </>
+          }
         </div>
       </Router>
     )

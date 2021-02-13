@@ -7,37 +7,3 @@
   text-align: center;
   width: 1100px;
 }
-
-.header {
-  align-items: center;
-  display: flex;
-  height: 100px;
-  justify-content: space-between;
-  width: 95%;
-}
-
-.header-company {
-  align-items: center;
-  display: flex;
-}
-
-.header-icon {
-  height: 50px;
-  width: 50px;
-}
-
-.navigation {
-  align-items: flex-end;
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.navigation-input {
-  display: flex;
-}
-
-.nav-link {
-  text-decoration: underline !important;
-}
