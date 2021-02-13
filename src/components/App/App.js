@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
-  Route,
-  Switch
+  Route
 } from 'react-router-dom'
 import NavBar from '../NavBar/NavBar'
 import Movies from '../Movies/Movies'
@@ -103,7 +102,7 @@ class App extends Component {
             />
           }
           {this.state.isLoading ? <Loading /> :
-            <Switch>
+            <>
               <Route
                 path='/movies/:id'
                 render={({ match }) => {
@@ -124,7 +123,7 @@ class App extends Component {
                   </div>
                 }
               />
-            </Switch>
+            </>
           }
         </div>
       </Router>

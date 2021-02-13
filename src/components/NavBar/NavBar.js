@@ -12,14 +12,16 @@ export default function NavBar({ searchBar, handleChange, resetError }) {
       </div>
       <div className='navigation'>
         <div className='navigation-input'>
-          <label htmlFor='search'></label>
-          <input
-            id='search'
-            name='searchBar'
-            value={searchBar}
-            onChange={handleChange}
-            placeholder='Search by movie title'
-          />
+          <label>
+            Search:
+            <input
+              id='search'
+              name='searchBar'
+              value={searchBar}
+              onChange={handleChange}
+              placeholder='by Movie Title'
+              />
+          </label>
         </div>
         <NavLink
           exact to='/'

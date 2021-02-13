@@ -52,7 +52,7 @@ export default class Details extends Component {
     }
 
     return (
-      <div>
+      <>
         {!this.state.isLoading &&
           <section className='details'>
             <div className='details-wrapper'>
@@ -72,7 +72,7 @@ export default class Details extends Component {
             </div>
           </section>
         }
-      </div>
+      </>
     )
   }
 }
