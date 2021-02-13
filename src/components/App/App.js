@@ -5,12 +5,12 @@ import {
   Switch,
   NavLink
 } from 'react-router-dom'
+import NavBar from '../NavBar/NavBar'
 import Movies from '../Movies/Movies'
 import Details from '../Details/Details'
 import TopFive from '../TopFive/TopFive'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import Loading from '../Loading/Loading'
-import greenTomato from '../../images/icon-tomato-green.png'
 import './App.css'
 
 class App extends Component {
@@ -92,30 +92,11 @@ class App extends Component {
     return (
       <Router>
         <div className='App'>
-          <header className='header'>
-            <div className='header-company'>
-              <img className='header-icon' src={greenTomato} alt='tomatillo logo' />
-              <h1>RANCID TOMATILLOS</h1>
-            </div>
-            <div className='navigation'>
-              <div className='navigation-input'>
-                <label htmlFor='search'></label>
-                <input
-                  id='search'
-                  name='searchBar'
-                  value={this.state.searchBar}
-                  onChange={this.handleChange}
-                  placeholder='Search by movie title'
-                />
-              </div>
-              <NavLink
-                exact to='/'
-                className='nav-link'
-                onClick={this.resetError}>
-                Home
-              </NavLink>
-            </div>
-          </header>
+          <NavBar
+            searchBar={this.state.searchBar}
+            handleChange={this.handleChange}
+            resetError={this.resetError}
+          />
           {this.state.error &&
             <ErrorMessage
               status={this.state.errorStatus}
