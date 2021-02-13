@@ -119,11 +119,24 @@ describe('Search Movie Functionality', () => {
 //     cy.intercept('GET', apiUrl, { fixture: 'allMovies', delay: 1000 })
       
 //     cy.visit(baseUrl)
+//     cy.get('.loading-container img').should('have.attr', 'src').should('include', 'http://localhost:3000/static/media/loading-tomato.cb2239ac.png')
+//       .get('loading-container h2').should('have.text', 'Loading')
       
 //   })
 
 //   it('should display loading message when fetching individual movie data for movie details page', () => {
 //     cy.intercept('GET', `${apiUrl}/694919`, { fixture: 'movie-money-plane', delay: 1000 }).as('singleMovie')
-//     .get('.movies article:first').click()
+//       .get('.movies article:first').click()
+//     cy.get('.loading-container img').should('have.attr', 'src').should('include', 'http://localhost:3000/static/media/loading-tomato.cb2239ac.png')
+//       .get('loading-container h2').should('have.text', 'Loading')
 //   })
 // })
+
+describe('Error Display', () => {
+  it('should display an error if incorrect url path or fetch response is an error', () => {
+    cy.intercept('GET', apiUrl, { statusCode: 404 })
+    cy.visit(`${baseUrl}movies/48734832`)
+      .get('h2:first').should('contain', 'Domain unavailable, please try a different domain.')
+      .get('.error-container h2').should('contain', 'Error Status: 404')
+  })
+})
