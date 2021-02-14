@@ -3,6 +3,7 @@
   background-color: #FBF7EF;
   display: flex;
   justify-content: space-between;
+  height: 80px;
   width: 100%;
 }
 
@@ -34,15 +35,21 @@
   text-decoration: underline !important;
 }
 
+@media screen and (max-width: 517px) {
+  .header-company h1 {
+    max-width: 205px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .header {
     justify-content: center;
     flex-direction: column;
+    height: auto;
   }
 
   .header-company {
-    /* margin: 0; */
-    padding: 0 2rem;
+    margin: 0;
     text-align: left;
     justify-content: center;
   }
