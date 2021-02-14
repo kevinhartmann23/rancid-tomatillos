@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
+import ScrollMemory from 'react-router-scroll-memory'
 import NavBar from '../NavBar/NavBar'
 import Movies from '../Movies/Movies'
 import Details from '../Details/Details'
@@ -134,6 +135,7 @@ class App extends Component {
                 render={() =>
                   <div>
                     <TopFive movies={this.state.movies} />
+                    <ScrollMemory />
                     <Movies movies={this.state.displayedMovies} />
                   </div>
                 }
