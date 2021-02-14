@@ -90,12 +90,12 @@ describe('Search Movie Functionality', () => {
   })
 
   it('should display the movies related to search keyword or text', () => {
-    cy
+    cy.pause()
       .get('.movies article:first img').should('have.attr', 'src').should('include', 'https://image.tmdb.org/t/p/original//aKx1ARwG55zZ0GpRvU2WrGrCG9o.jpg')
       .get('.movies article:first .rating-container').children().should('have.length', 6)
   })
 
-  it.skip('search input value and filtered movies should clear out after clicking home page nav-link', () => {
+  it('search input value and filtered movies should clear out after clicking home page nav-link', () => {
       cy
         .get('.nav-link').click()     
         .get('input').should('have.value', '')
@@ -103,7 +103,7 @@ describe('Search Movie Functionality', () => {
         .get('.movies article:first .rating-container').children().should('have.length', 8)
   })
 
-  it.skip('search input value and filtered movies should clear out selecting a filtered movie to view details', () => {
+  it('search input value and filtered movies should clear out selecting a filtered movie to view details', () => {
     cy
       .get('.movies article:first').click()
       .get('input').should('have.value', '')
@@ -114,29 +114,11 @@ describe('Search Movie Functionality', () => {
   })
 })
 
-// describe('Loading Page Display', () => {
-//   it('should display an loading message when fetching data from api on page load', () => {
-//     cy.intercept('GET', apiUrl, { fixture: 'allMovies', delay: 1000 })
-      
-//     cy.visit(baseUrl)
-//     cy.get('.loading-container img').should('have.attr', 'src').should('include', 'http://localhost:3000/static/media/loading-tomato.cb2239ac.png')
-//       .get('loading-container h2').should('have.text', 'Loading')
-      
-//   })
-
-//   it('should display loading message when fetching individual movie data for movie details page', () => {
-//     cy.intercept('GET', `${apiUrl}/694919`, { fixture: 'movie-money-plane', delay: 1000 }).as('singleMovie')
-//       .get('.movies article:first').click()
-//     cy.get('.loading-container img').should('have.attr', 'src').should('include', 'http://localhost:3000/static/media/loading-tomato.cb2239ac.png')
-//       .get('loading-container h2').should('have.text', 'Loading')
-//   })
-// })
-
 describe('Error Display', () => {
   it('should display an error if incorrect url path or fetch response is an error', () => {
     cy.intercept('GET', apiUrl, { statusCode: 404 })
     cy.visit(`${baseUrl}movies/48734832`)
-      .get('h2:first').should('contain', 'Domain unavailable, please try a different domain.')
+      .get('h2:first').should('contain', 'Domain unavailable, please return to home and try again.')
       .get('.error-container h2').should('contain', 'Error Status: 404')
   })
 })
