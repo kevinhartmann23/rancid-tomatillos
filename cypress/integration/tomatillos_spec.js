@@ -8,7 +8,7 @@ describe('Rancid Tomatillos Home Page', () => {
   it('should display a navigation bar with functionality', () => {
     cy
       .intercept('GET', apiUrl, { fixture: 'allMovies' })
-    cy
+      
       .visit(baseUrl)
         .get('.header')
           .find('img').should('be.visible')
@@ -38,7 +38,7 @@ describe('Top Five Functionality', () => {
   it('should be able to click on any top 5 movie to view details on selected movie', () => {
     cy
       .intercept('GET', `${apiUrl}/718444`, { fixture: 'movie-rogue' })
-    cy 
+      
       .get('.topfive #718444').click()
   })
 
@@ -67,18 +67,16 @@ describe('Individual Movie Details', () => {
   it('should be able to click anywhere on a movie card on the home page to view more details', () => {
     cy
       .intercept('GET', `${apiUrl}/694919`, { fixture: 'movie-money-plane' })
-
-    cy
+      
       .get('.movies article:first').click()
-
-      .get('h2').should('have.text', 'Money Plane')
-      .get('.details-date').should('contain', 'Release Date:')
-      .get('.details-overview').should('contain', 'Overview:')
-      .get('.details-genres').should('contain', 'Genres:')
-      .get('.details-budget').should('contain', 'Budget:')
-      .get('.details-revenue').should('contain', 'Revenue:')
-      .get('.details-runtime').should('contain', 'Runtime:')
-      .get('.details-rating').should('contain', 'Average Rating:')
+        .get('h2').should('have.text', 'Money Plane')
+        .get('.details-date').should('contain', 'Release Date:')
+        .get('.details-overview').should('contain', 'Overview:')
+        .get('.details-genres').should('contain', 'Genres:')
+        .get('.details-budget').should('contain', 'Budget:')
+        .get('.details-revenue').should('contain', 'Revenue:')
+        .get('.details-runtime').should('contain', 'Runtime:')
+        .get('.details-rating').should('contain', 'Average Rating:')
   })
 
   it('should change url path to selected movies/:id page', () => {
@@ -94,7 +92,7 @@ describe('Search Movie Functionality', () => {
   it('should be able to type text into search bar', () => {
     cy
       .intercept('GET', apiUrl, { fixture: 'allMovies' })
-    cy
+      
       .visit(baseUrl)
         .get('input').type('mulan')
   })
@@ -128,9 +126,8 @@ describe('Error Display', () => {
   it('should display an error if incorrect url path or fetch response is an error', () => {
     cy
       .intercept('GET', apiUrl, { statusCode: 404 })
-    cy
       .visit(`${baseUrl}movies/48734832`)
-      .get('h2:first').should('contain', 'Domain unavailable, please return to home and try again.')
-      .get('.error-container h2').should('contain', 'Error Status: 404')
+        .get('h2:first').should('contain', 'Domain unavailable, please return to home and try again.')
+        .get('.error-container h2').should('contain', 'Error Status: 404')
   })
 })
