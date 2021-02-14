@@ -1,6 +1,8 @@
 .topfive {
   display: flex;
   justify-content: space-between;
+  overflow-x: scroll;
+  padding-bottom: 1rem;
 }
 
 .topfive-container {
@@ -8,7 +10,8 @@
   flex-direction: column;
   display: flex;
   text-align: left;
-  width: 1100px;
+  margin: 2rem 0;
+  width: 90vw;
 }
 
 .topfive .movie {

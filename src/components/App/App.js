@@ -41,6 +41,7 @@ class App extends Component {
 
   fetchData = (input) => {
     let fetchResponse
+    this.setState({ searchBar: '' })
 
     return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${input}`)
       .then(response => {
@@ -75,15 +76,29 @@ class App extends Component {
   }
 
   handleError = (error) => {
-    this.setState({ errorMessage: error, error: true })
+    if (error.name === 'error') {
+      this.setState({ errorMessage: 'No movie found with specified id', error: true })
+
+    } else {
+      this.setState({ errorMessage: error, error: true })
+    }
   }
 
   resetError = (event) => {
     window.onpopstate = () => {
-      this.setState({ errorStatus: 0, error: false })
+      this.setState({
+        errorStatus: 0,
+        error: false,
+        searchBar: '',
+        displayedMovies: this.state.movies
+      })
     }
 
-    this.setState({ errorStatus: 0, error: false })
+    this.setState({
+      errorStatus: 0,
+      error: false,
+      searchBar: '',
+      displayedMovies: this.state.movies })
   }
 
   render() {

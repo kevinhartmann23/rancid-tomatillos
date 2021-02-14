@@ -11,7 +11,7 @@ export default function ErrorMessage({ status, message }) {
     status = message
 
   } else if (status > 399 && status < 500) {
-    errorMessage = <h2>Domain unavailable, please try a different domain.</h2>
+    errorMessage = <h2>Domain unavailable, please return to home and try again.</h2>
 
   } else if (status > 499) {
     errorMessage = <h2>Server unavailable, please refresh the page.</h2>

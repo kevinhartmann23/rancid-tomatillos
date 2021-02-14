@@ -1,14 +1,16 @@
 .header {
   align-items: center;
+  background-color: #FBF7EF;
   display: flex;
-  height: 100px;
   justify-content: space-between;
-  width: 95%;
+  height: 80px;
+  width: 100%;
 }
 
 .header-company {
   align-items: center;
   display: flex;
+  margin-left: 1rem;
 }
 
 .header-icon {
@@ -22,6 +24,7 @@
   height: 100%;
   flex-direction: column;
   justify-content: space-around;
+  margin-right: 1rem;
 }
 
 .navigation-input {
@@ -30,4 +33,31 @@
 
 .nav-link {
   text-decoration: underline !important;
+}
+
+@media screen and (max-width: 517px) {
+  .header-company h1 {
+    max-width: 205px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    justify-content: center;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .header-company {
+    margin: 0;
+    text-align: left;
+    justify-content: center;
+  }
+
+  .navigation {
+    align-items: center;
+    justify-content: space-around;
+    height: 60px;
+    margin: 0;
+  }
 }
