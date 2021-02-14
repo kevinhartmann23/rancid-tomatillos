@@ -9,20 +9,20 @@
 
 @keyframes ellipsis {
   to {
-    width: .6em;    
+    width: 2rem;    
   }
 }
 
 @-webkit-keyframes ellipsis {
   to {
-    width: .6em;    
+    width: 2rem;    
   }
 }
 
 .loading {
-  font-size: 2.5em;
-  margin-top: 2em;
-  margin-bottom: 0em;
+  font-size: 2.5rem;
+  margin-top: 6rem;
+  margin-bottom: 0rem;
   position: absolute;
   transform: translate(-50%, -50%);
   top: 30%;
