@@ -6,7 +6,8 @@ describe('Rancid Tomatillos Home Page', () => {
 
 
   it('should display a navigation bar with functionality', () => {
-    cy.intercept('GET', apiUrl, { fixture: 'allMovies' })
+    cy
+      .intercept('GET', apiUrl, { fixture: 'allMovies' })
     cy
       .visit(baseUrl)
         .get('.header')
@@ -35,34 +36,40 @@ describe('Top Five Functionality', () => {
   })
 
   it('should be able to click on any top 5 movie to view details on selected movie', () => {
-    cy.intercept('GET', `${apiUrl}/718444`, { fixture: 'movie-rogue' })
+    cy
+      .intercept('GET', `${apiUrl}/718444`, { fixture: 'movie-rogue' })
     cy 
       .get('.topfive #718444').click()
   })
 
   it('should change url path to selected movies/:id page', () => {
-    cy.on("url:changed", newUrl => {
-      expect(newUrl).to.contain('movies/694919')
-    })
+    cy
+      .on("url:changed", newUrl => {
+        expect(newUrl).to.contain('movies/694919')
+      })
   })
 
   it('should have ability to navigate home by clicking the home button, returning user to main page', () => { 
-    cy.get('.nav-link').click()
+    cy
+      .get('.nav-link').click()
     
   })
 
   it('should change url path to home page', () => {
-    cy.on("url:changed", newUrl => {
-      expect(newUrl).to.equal(baseUrl)
-    })
+    cy
+      .on("url:changed", newUrl => {
+        expect(newUrl).to.equal(baseUrl)
+      })
   })
 })
 
 describe('Individual Movie Details', () => {
   it('should be able to click anywhere on a movie card on the home page to view more details', () => {
-    cy.intercept('GET', `${apiUrl}/694919`, { fixture: 'movie-money-plane' })
+    cy
+      .intercept('GET', `${apiUrl}/694919`, { fixture: 'movie-money-plane' })
 
-    cy.get('.movies article:first').click()
+    cy
+      .get('.movies article:first').click()
 
       .get('h2').should('have.text', 'Money Plane')
       .get('.details-date').should('contain', 'Release Date:')
@@ -75,22 +82,25 @@ describe('Individual Movie Details', () => {
   })
 
   it('should change url path to selected movies/:id page', () => {
-    cy.on("url:changed", newUrl => {
-      expect(newUrl).to.contain('movies/694919')
-    })
+    cy
+      .on("url:changed", newUrl => {
+        expect(newUrl).to.contain('movies/694919')
+      })
   })
 })
 
 describe('Search Movie Functionality', () => {
   
   it('should be able to type text into search bar', () => {
-    cy.intercept('GET', apiUrl, { fixture: 'allMovies' })
+    cy
+      .intercept('GET', apiUrl, { fixture: 'allMovies' })
+    cy
       .visit(baseUrl)
         .get('input').type('mulan')
   })
 
   it('should display the movies related to search keyword or text', () => {
-    cy.pause()
+    cy
       .get('.movies article:first img').should('have.attr', 'src').should('include', 'https://image.tmdb.org/t/p/original//aKx1ARwG55zZ0GpRvU2WrGrCG9o.jpg')
       .get('.movies article:first .rating-container').children().should('have.length', 6)
   })
@@ -116,8 +126,10 @@ describe('Search Movie Functionality', () => {
 
 describe('Error Display', () => {
   it('should display an error if incorrect url path or fetch response is an error', () => {
-    cy.intercept('GET', apiUrl, { statusCode: 404 })
-    cy.visit(`${baseUrl}movies/48734832`)
+    cy
+      .intercept('GET', apiUrl, { statusCode: 404 })
+    cy
+      .visit(`${baseUrl}movies/48734832`)
       .get('h2:first').should('contain', 'Domain unavailable, please return to home and try again.')
       .get('.error-container h2').should('contain', 'Error Status: 404')
   })
