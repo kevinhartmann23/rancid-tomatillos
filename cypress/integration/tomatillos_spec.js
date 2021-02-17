@@ -127,7 +127,7 @@ describe('Error Display', () => {
     cy
       .intercept('GET', apiUrl, { statusCode: 404 })
       .visit(`${baseUrl}movies/48734832`)
-        .get('h2:first').should('contain', 'Domain unavailable, please return to home and try again.')
+        .get('h2:first').should('contain', 'Domain unavailable, please return home and try again.')
         .get('.error-container h2').should('contain', 'Error Status: 404')
   })
 })
