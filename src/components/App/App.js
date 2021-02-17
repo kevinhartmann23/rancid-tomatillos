@@ -132,13 +132,13 @@ class App extends Component {
                 />
               <Route
                 exact path='/'
-                render={() =>
-                  <div>
+                render={() => {
+                  return <div>
                     <TopFive movies={this.state.movies} />
                     <ScrollMemory />
                     <Movies movies={this.state.displayedMovies} />
                   </div>
-                }
+                }}
               />
             </>
           }

@@ -55,7 +55,7 @@ export default class Details extends Component {
       <>
         {!this.state.isLoading &&
           <section className='details-container'>
-            <article className='details'>
+            <article className='details' aria-live='polite'>
               <div className='details-text'>
                 <h2 className='details-title'>{title}</h2>
                 <p className='details-date'><span>Release Date:</span> {release_date}</p>
