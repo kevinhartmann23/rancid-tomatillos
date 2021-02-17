@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# Rancid Tomatillos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+* [Introduction](#introduction)
+* [Features](#features)
+* [Continuous Improvement](#continuous-improvement)
+* [Technologies](#technologies)
+* [Deployment](#deployment)
+* [Authors](#authors)
 
-## Available Scripts
+## Introduction
+The primary goal of Rancid Tomatillos was to display movie data from multiple APIs in a user friendly way and to gain experience building an application from scratch using the React framework. As a user, you have the ability to view all movies from the API, as well as search for a specific title, and view additional information about the movie by clicking on a movie card.
 
-In the project directory, you can run:
+### Motivation
+The main motivation of this project was to gain experience building a React application, Cypress End-to-End testing, and React Router.
 
-### `npm start`
+## Features
+* [Movies Page](#movies-page)
+* [Details Page](#details-page)
+* [Search Functionality](#search-functionality)
+* [Error Page](#error-page)
+* [Loading Screen](#loading-screen)
+* [Responsive Design](#responsive-design)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Movies Page
+When a user visits the website, they will see a display of all the movies from [this API](https://rancid-tomatillos.herokuapp.com/api/v2/movies). All the movie cards display the movie cover as well as a ranking out of ten for that movie.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<img width="1440" alt="Rancid Tomatillos movie display" src="https://user-images.githubusercontent.com/70297733/108141982-1973a200-7082-11eb-8f26-92d8571b7edd.png">
 
-### `npm test`
+### Details Page
+When a user clicks on any of the movie cards, they will see a new page which displays additional information about that movie. From this page, the user can click on the Home link in the header or they can click the back button in their browser to get back to the previous page. When the back button is selected, the movies page should display where the user scrolled to before selecting the movie.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img width="1440" alt="Details page" src="https://user-images.githubusercontent.com/70297733/108142079-488a1380-7082-11eb-8441-1e359d960389.png">
 
-### `npm run build`
+<details>
+  <Summary>Under the Hood</summary>
+  <a href='https://www.npmjs.com/package/react-router-scroll-memory'>This</a> npm package was used to maintain the scroll history of the movies page.
+</details>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Search Functionality
+From the movies view, the user can type into the search bar at the top of the page to search for a movie title. The page will automatically update to display only the titles that match what is in the search bar.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Error Page
+To maintain a direct and great user experience, we added an error page. The error page is designed to be dynamic to the type of error a user may encounter. Styling this page, we wanted to make it fun and direct.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Loading Screen
+In order to keep our user experience positive, we implemented a loading screen that will display while information is being retrieved from the API.
 
-### `npm run eject`
+### Responsive Design
+Responsiveness was a consideration while working on this project. See below for screenshots of the mobile friendly version of the website:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<p align="center">
+  <img width="250" alt="Rancid Tomatillos movie display mobile view" src="https://user-images.githubusercontent.com/70297733/108142304-c1896b00-7082-11eb-9ce9-d41da5739893.png">
+  <img width="250" alt="Details page mobile view" src="https://user-images.githubusercontent.com/70297733/108142346-d36b0e00-7082-11eb-8a10-4f71489f7288.png">
+</p>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Continuous Improvement
+Throughout our project workflow, we found that our improvement was team-driven with solution-based problem solving and individual learning/teaching opportunities. Whenever there were areas for improvement, one team member had a solution and the desire to teach the other. This kept us moving at a great pace and developed our understanding of new technologies daily.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Wins & Reflections
+- **Teamwork & Communication**: Together we achieved our set sprint goals in an organized fashion with respect to our project board. Communication was transparent and respectful. Having the ability to relay information, thoughts, and ideas to one another during paired programming allowed a smooth process in development and productivity.
+- **Workflow**: We found a great balance of paired-programming and individual work time. This allowed us to be extremely efficient and remain on task with what we planned to accomplish each day.
+- **Exploring & Researching**: Any time we hit a struggle, we took the time to research and apply. Finding certain answers may not have been the exact ones, but we stepped out of our comfort zone exploring other `npm libraries` that catered to our specific needs and end goal.
+- **Overall**: During this project, we learned a lot individually and as a team. We both feel that after completion of this project, we have a clear understanding of each learning goal and we had fun doing it!
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Technologies
+React.js, React-Router, Cypress.io, Fetch, JSON  
+Npm libraries: [scroll history](https://www.npmjs.com/package/react-router-scroll-memory), [html parser](https://www.npmjs.com/package/html-react-parser)
 
-## Learn More
+## Deployment
+This website was deployed to Heroku through Heroku’s automated deploy pipeline. The API was previously deployed through Heroku by Turing staff.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[Rancid Tomatillos Deployment Link](https://rancid-tomatillos-khap.herokuapp.com/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Authors
+[Alia Peterson](https://github.com/alia-peterson)  
+<img src="https://avatars3.githubusercontent.com/u/70297733?s=400&u=f7e7c3682b498a90f005565b56b38a8ac985b053&v=4" alt="Ms. Peterson"
+width="150" height="auto"/>
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Kevin Hartmann](https://github.com/kevinhartmann23)  
+<img src="https://avatars.githubusercontent.com/u/68248071?s=400&u=1a8024a192ba58708505c2c7f4056679b4af65e0&v=4" alt="Kevin Hartmann Profile"
+width="150" height="auto"/>
