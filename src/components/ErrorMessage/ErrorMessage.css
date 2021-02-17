@@ -1,7 +1,9 @@
 .error-page {
   align-items: center;
+  background-color: #FBF7EF;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .error-container {

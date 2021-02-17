@@ -22,7 +22,7 @@ function Card({ id, poster, title, rating, handleClick }) {
     <Link to={`/movies/${id}`}>
       <article className='movie' id={id} onClick={handleClick}>
         <img className='movie-poster' src={poster} alt={`${title} poster`} />
-        <div className='rating-container'>
+        <div className='rating-container' role='img' aria-label={`Rating ${tomatoDisplay.length} out of ten`} >
           {Parse(tomatoDisplay.join(''))}
           <p className='rating-text'>/10</p>
         </div>
