@@ -1,5 +1,5 @@
 
-const baseUrl = 'http://localhost:3000/'
+const baseUrl = 'https://rancid-tomatillos-hartmann.herokuapp.com/'
 const apiUrl = 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
 
 describe('Rancid Tomatillos Home Page', () => {
