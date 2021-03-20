@@ -15,4 +15,4 @@ install:
 before_script:
   - npm start -- --silent &
 script:
-  - $(npm bin)/cypress run --record
+  - $(npm bin)/cypress run --record --key db922b53-3cd9-45fc-9f87-73e94b0d34e9
